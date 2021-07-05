@@ -1,0 +1,23 @@
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+#include "$LAMBDAALGROOT/share/jobOptions_Lambda.txt"
+
+Lambda.ecms = 3.686;
+
+// Input REC or DST file name 
+EventCnvSvc.digiRootInputFile = {
+"/besfs/groups/tauqcd/yanl/664/mc/LLbar/PHSP/664p03/2009/psip_lambda_1.dst"
+ };
+
+// Set output level threshold (2=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 5;
+
+// Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = 10000;
+
+ApplicationMgr.HistogramPersistency = "ROOT";
+NTupleSvc.Output = { "FILE1 DATAFILE='/besfs/groups/tauqcd/yanl/664/mc/LLbar/ana_psip_LLbar.root' OPT='NEW' TYP='ROOT'"};
+
+				

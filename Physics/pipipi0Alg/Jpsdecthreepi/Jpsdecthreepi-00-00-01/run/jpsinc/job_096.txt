@@ -1,0 +1,126 @@
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+#include "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt"
+
+// Input REC or DST file name
+
+EventCnvSvc.digiRootInputFile = {
+
+
+
+
+
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27266_file7.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27267_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27267_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27267_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27267_file4.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27268_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27268_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27268_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file4.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file5.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file6.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file7.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27269_file8.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27270_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27270_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27271_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27271_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27271_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27271_file4.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27271_file5.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27271_file6.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file4.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file5.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file6.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27272_file7.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27273_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27273_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27273_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27273_file4.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27273_file5.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27273_file6.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27274_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27274_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27274_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27274_file4.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27274_file5.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27274_file6.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27275_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27275_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27275_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27276_file1.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27276_file2.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27276_file3.dst"
+,
+"/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27276_file4.dst"
+};
+
+// Set output level threshold (1=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 6;
+
+// Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = -1;
+
+ApplicationMgr.HistogramPersistency = "ROOT";
+NTupleSvc.Output = { "FILE1 DATAFILE='
+
+
+/besfs/groups/jpsi/jpsigroup/user/vindy/syst/Jpsi_inc096.root' OPT='NEW' TYP='ROOT'"};

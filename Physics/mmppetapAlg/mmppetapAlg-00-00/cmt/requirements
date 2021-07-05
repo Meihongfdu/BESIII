@@ -1,0 +1,23 @@
+package mmppetapAlg
+author He Kanglin <hekl@ihep.ac.cn>
+
+use BesPolicy BesPolicy-*
+use GaudiInterface GaudiInterface-* External
+
+use DstEvent     DstEvent-*    Event
+use EventModel   EventModel-*  Event
+use EvtRecEvent  EvtRecEvent-* Event
+use McTruth      McTruth-*     Event
+use BesDChain    BesDChain-*    Event
+use VertexFit    VertexFit-*   Analysis
+use ParticleID   ParticleID-*  Analysis
+use HadronInfo   HadronInfo-*  Utilities
+use GammaConv    GammaConv-*   Reconstruction
+
+use BesROOT      BesROOT-00-*     External
+
+macro_append mmppetapAlg_shlibflags " -lDTagAlg "
+
+apply_pattern component_library
+library mmppetapAlg  *.cxx  components/*.cxx util/*.cxx
+

@@ -1,0 +1,16 @@
+./src/util/MyInitIP.cxx
+./src/util/MyIsPID.cxx
+./src/util/MyUtil.cxx
+./src/util/MyIsGoodtrack.cxx
+./src/util/MyTrk.cxx
+./src/components/entries.cxx
+./src/components/load.cxx
+./src/eeppetapAlg.cxx
+./eeppetapAlg/eeppetapAlg.h
+./eeppetapAlg/util/MyIsPID.h
+./eeppetapAlg/util/MyIsGoodtrack.h
+./eeppetapAlg/util/MyTrk.h
+./eeppetapAlg/util/MyInitIP.h
+./eeppetapAlg/util/MyUtil.h
+./cmt/requirements
+./share/jobOptions_eeppetapAlg.txt

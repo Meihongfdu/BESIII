@@ -1,0 +1,22 @@
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+#include "$EEPPETAPALGROOT/share/jobOptions_eeppetapAlg.txt"
+
+// Input REC or DST file name 
+EventCnvSvc.digiRootInputFile = {
+"/scratchfs/bes/hjli/chicj/jpsi/eeppetap/dst/eeppetap_eta/eeppetap_eta_100.dst"
+//"/scratchfs/bes/zhuan/MCcard/init/dst/12_PsiptoLambdaLambdabarPhi/PsiptoLambdaLambdabarPhi_030.dst"
+};
+
+// Set output level threshold (2=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 5;
+
+// Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = 1000;
+
+ApplicationMgr.HistogramPersistency = "ROOT";
+NTupleSvc.Output = {
+"FILE1 DATAFILE='test.root' OPT='NEW' TYP='ROOT'"
+};

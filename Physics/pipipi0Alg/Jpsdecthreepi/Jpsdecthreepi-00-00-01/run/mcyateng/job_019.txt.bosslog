@@ -1,0 +1,2055 @@
+
+**************************************************
+               BOSS version: 6.6.4
+************** BESIII Collaboration **************
+
+JobOptionsSvc        INFO 
+//GP:================================================================================
+//GP: include "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/mcyateng/job_019.txt" (0,0)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Event/RootIO/RootIO-00-01-31/share/jobOptions_ReadRec.txt" (1,10)
+ApplicationMgr.DLLs +=  [ "RecMakerAlg" ] ;                             //GP: (1,1)
+ApplicationMgr.TopAlg +=  [ "RecMakerAlg" ] ;                           //GP: (1,1)
+ApplicationMgr.DLLs +=  [ "RootCnvSvc" ] ;                              //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "EvtPersistencySvc/EventPersistencySvc" ] ; //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "RootEvtSelector/EventSelector" , "RootCnvSvc/EventCnvSvc" ] ;//GP: (1,1)
+EventPersistencySvc.CnvServices +=  [ "EventCnvSvc" ] ;                 //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Event/RootIO/RootIO-00-01-31/share/jobOptions_ReadRec.txt" (11,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt" (2,10)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Control/OfflineEventLoopMgr/OfflineEventLoopMgr-00-00-13/share/OfflineEventLoopMgr_Option.txt" (1,10)
+ApplicationMgr.DLLs +=  [ "OfflineEventLoopMgr" ] ;                     //GP: (1,1)
+ApplicationMgr.EventLoop = "OfflineEventLoopMgr";                       //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Control/OfflineEventLoopMgr/OfflineEventLoopMgr-00-00-13/share/OfflineEventLoopMgr_Option.txt" (3,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Database/DatabaseSvc/DatabaseSvc-00-00-19/share/DatabaseConfig.txt" (2,10)
+ApplicationMgr.DLLs +=  [ "DatabaseSvc" ] ;                             //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "DatabaseSvc" ] ;                           //GP: (1,1)
+DatabaseSvc.DbType = "mysql";                                           //GP: (1,1)
+DatabaseSvc.Host = "bes3db2.ihep.ac.cn";                                //GP: (1,1)
+DatabaseSvc.User = "guest";                                             //GP: (1,1)
+DatabaseSvc.Passwd = "guestpass";                                       //GP: (1,1)
+DatabaseSvc.SqliteDbPath = "$BESCALDATA/database";                      //GP: (1,1)
+DatabaseSvc.ReuseConnection = 1;                                        //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Database/DatabaseSvc/DatabaseSvc-00-00-19/share/DatabaseConfig.txt" (10,1)
+ApplicationMgr.DLLs +=  [ "VertexFit" ] ;                               //GP: (2,10)
+ApplicationMgr.ExtSvc +=  [ "VertexDbSvc" ] ;                           //GP: (2,10)
+VertexDbSvc.BossRelease = "6.6.4";                                      //GP: (2,10)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt" (9,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/share/MagneticField.txt" (3,10)
+ApplicationMgr.DLLs +=  [ "MagneticField" ] ;                           //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "MagneticFieldSvc" ] ;                      //GP: (1,1)
+MagneticFieldSvc.IfRealField = 1;                                       //GP: (1,1)
+MagneticFieldSvc.OutLevel = 1;                                          //GP: (1,1)
+MagneticFieldSvc.GridDistance = 5;                                      //GP: (1,1)
+MagneticFieldSvc.RunMode = 3;                                           //GP: (1,1)
+MagneticFieldSvc.Cur_SCQ1_55 = 349.4;                                   //GP: (1,1)
+MagneticFieldSvc.Cur_SCQ1_89 = 426.2;                                   //GP: (1,1)
+MagneticFieldSvc.Cur_SCQ2_10 = 474.2;                                   //GP: (1,1)
+MagneticFieldSvc.UseDBFlag = 1;                                         //GP: (1,1)
+MagneticFieldSvc.TurnOffField = 0;                                      //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/share/MagneticField.txt" (30,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/PhotonCor/AbsCor/AbsCor-00-00-28/share/jobOptions_AbsCor.txt" (4,10)
+ApplicationMgr.DLLs +=  [ "EmcRecGeoSvc" ] ;                            //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "EmcRecGeoSvc" ] ;                          //GP: (1,1)
+ApplicationMgr.DLLs +=  [ "AbsCor" ] ;                                  //GP: (1,1)
+ApplicationMgr.TopAlg +=  [ "AbsCor" ] ;                                //GP: (1,1)
+AbsCor.NTupleOut = 0;                                                   //GP: (1,1)
+AbsCor.UseTof = 1;                                                      //GP: (1,1)
+AbsCor.DoDataCor = 1;                                                   //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/PhotonCor/AbsCor/AbsCor-00-00-28/share/jobOptions_AbsCor.txt" (13,1)
+//GP: include "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt" (5,10)
+//GP: skip already included file  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt" (1,10)
+ApplicationMgr.DLLs +=  [ "Jpsdecthreepi" ] ;                           //GP: (1,10)
+ApplicationMgr.TopAlg +=  [ "Jpsdecthreepi" ] ;                         //GP: (1,10)
+Jpsdecthreepi.TestMC = 1;                                               //GP: (1,10)
+Jpsdecthreepi.TestJPSMC = 1;                                            //GP: (1,10)
+//GP: end  "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt" (8,33)
+EventCnvSvc.digiRootInputFile =  [ "/scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0095.dst" , "/scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0096.dst" , "/scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0097.dst" , "/scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0098.dst" , "/scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0099.dst" ] ;//GP: (5,10)
+MessageSvc.OutputLevel = 6;                                             //GP: (5,10)
+ApplicationMgr.EvtMax = -1;                                             //GP: (5,10)
+ApplicationMgr.HistogramPersistency = "ROOT";                           //GP: (5,10)
+NTupleSvc.Output =  [ "FILE1 DATAFILE='   /besfs/groups/jpsi/jpsigroup/user/vindy/syst/Dalitzsigmc019.root' OPT='NEW' TYP='ROOT'" ] ;//GP: (5,10)
+//GP: end  "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/mcyateng/job_019.txt" (37,1)
+//GP:================================================================================
+
+JobOptionsSvc        INFO Job options successfully read in from /besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/mcyateng/job_019.txt
+JobOptionsSvc     WARNING /besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt(1,10) : WARNING #0 : Skip already included file  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr    SUCCESS 
+====================================================================================================================================
+                                                   Welcome to ApplicationMgr $Revision: 1.77 $
+                                          running on bws0519.ihep.ac.cn on Thu Oct 20 15:37:57 2016
+====================================================================================================================================
+
+[1mRooFit v3.00a -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2009 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+ApplicationMgr       INFO Successfully loaded modules : RecMakerAlg, RootCnvSvc, OfflineEventLoopMgr, DatabaseSvc, VertexFit, MagneticField, EmcRecGeoSvc, AbsCor, Jpsdecthreepi
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/barIronpar.txt
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/barAirpar.txt
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/endIronpar.txt
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/endAirpar.txt
+DatabaseSvc: Connected to MySQL database
+Construct Emc from GdmlFile /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/DetectorDescription/GdmlManagement/GdmlManagement-00-00-31/dat/Emc.gdml
+SAXProcessor type ROOT
+SAXProcessor requires type 2
+Top Volume not found 
+Find logicalEMC!
+gGeoManager success!
+mccor = 0
+ApplicationMgr       INFO Application Manager Initialized successfully
+ApplicationMgr       INFO Application Manager Started successfully
+
+**************************************************
+Print JobInfo for data file: /scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0095.dst
+          BOSS version: 6.6.4.p01
+**************************************************
+
+
+**************************************************
+          Decay Options: 
+Decay J/psi
+1.000    pi+ pi- pi0      PHSP;
+Enddecay
+Decay pi0
+1.0000     e+  e- gamma                     DIY;
+Enddecay
+End
+
+**************************************************
+
+
+**************************************************
+          JobOptions for this data file: 
+
+#include "$OFFLINEEVENTLOOPMGRROOT/share/OfflineEventLoopMgr_Option.txt"
+#include "$KKMCROOT/share/jobOptions_KKMC.txt"
+KKMC.CMSEnergy = 3.097;
+KKMC.BeamEnergySpread=0.0008;
+KKMC.NumberOfEventPrinted=1;
+KKMC.GenerateJPsi=true;
+#include "$BESEVTGENROOT/share/BesEvtGen.txt"
+EvtDecay.userDecayTableName = "Diekp3pi0.dec";
+BesRndmGenSvc.RndmSeed = 110095;
+#include "$BESSIMROOT/share/G4Svc_BesSim.txt"
+#include "$CALIBSVCROOT/share/calibConfig_sim.txt"
+RealizationSvc.RunIdList = {-009947,0,-0010878};
+#include "$ROOTIOROOT/share/jobOptions_Digi2Root.txt"
+RootCnvSvc.digiRootOutputFile = "Diekp3pi0_0095.rtraw";
+MessageSvc.OutputLevel  = 5;
+ApplicationMgr.EvtMax = 1000;
+
+          end of the jobOptions file 
+**************************************************
+
+#include "$ROOTIOROOT/share/jobOptions_ReadRoot.txt"
+#include "$OFFLINEEVENTLOOPMGRROOT/share/OfflineEventLoopMgr_Option.txt"
+#include "$BESEVENTMIXERROOT/share/jobOptions_EventMixer_rec.txt"
+MixerAlg.ReplaceDataPath="/lustre/bes3data/randomtrg/";
+#include "$CALIBSVCROOT/share/job-CalibData.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ESTIMEALGROOT/share/job_EsTimeAlg.txt"
+#include "$MDCXRECOROOT/share/jobOptions_MdcPatTsfRec.txt"
+#include "$KALFITALGROOT/share/job_kalfit_numf_data.txt"
+#include "$MDCDEDXALGROOT/share/job_dedx_all.txt"
+#include "$TRKEXTALGROOT/share/TrkExtAlgOption.txt"
+#include "$TOFRECROOT/share/jobOptions_TofRec.txt"
+#include "$TOFENERGYRECROOT/share/TofEnergyRecOptions_MC.txt"
+#include "$EMCRECROOT/share/EmcRecOptions.txt"
+#include "$MUCRECALGROOT/share/jobOptions_MucRec.txt"
+#include "$EVENTASSEMBLYROOT/share/EventAssembly.txt"
+#include "$PRIMARYVERTEXALGROOT/share/jobOptions_kalman.txt"
+#include "$VEEVERTEXALGROOT/share/jobOptions_veeVertex.txt"
+#include "$HLTMAKERALGROOT/share/jobOptions_HltMakerAlg.txt"
+#include "$ROOTIOROOT/share/jobOptions_Dst2Root.txt"
+#include "$CALIBSVCROOT/share/calibConfig_rec_mc.txt"
+BesRndmGenSvc.RndmSeed = 110095;
+MessageSvc.OutputLevel = 5; 
+EventCnvSvc.digiRootInputFile={"/moose/Bes3User/yzhang/yzhang/Jpsi/pippimpi0/MC/sim/raw/Diekp3pi0_0095.rtraw"};
+EventCnvSvc.digiRootOutputFile ="Diekp3pi0_0095.dst";
+ApplicationMgr.EvtMax = 1000;
+
+          end of the jobOptions file 
+**************************************************
+
+Using the SftVer and ParVer (6.6.3, 1) for run 9947. 
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+
+**************************************************
+Print JobInfo for data file: /scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0096.dst
+          BOSS version: 6.6.4.p01
+**************************************************
+
+
+**************************************************
+          Decay Options: 
+Decay J/psi
+1.000    pi+ pi- pi0      PHSP;
+Enddecay
+Decay pi0
+1.0000     e+  e- gamma                     DIY;
+Enddecay
+End
+
+**************************************************
+
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+
+**************************************************
+Print JobInfo for data file: /scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0097.dst
+          BOSS version: 6.6.4.p01
+**************************************************
+
+
+**************************************************
+          Decay Options: 
+Decay J/psi
+1.000    pi+ pi- pi0      PHSP;
+Enddecay
+Decay pi0
+1.0000     e+  e- gamma                     DIY;
+Enddecay
+End
+
+**************************************************
+
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+
+**************************************************
+Print JobInfo for data file: /scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0098.dst
+          BOSS version: 6.6.4.p01
+**************************************************
+
+
+**************************************************
+          Decay Options: 
+Decay J/psi
+1.000    pi+ pi- pi0      PHSP;
+Enddecay
+Decay pi0
+1.0000     e+  e- gamma                     DIY;
+Enddecay
+End
+
+**************************************************
+
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+
+**************************************************
+Print JobInfo for data file: /scratchfs/bes/zhangyt/MC/Jpsi/ustc/pippimpi0/rec/Diekp3pi0_0099.dst
+          BOSS version: 6.6.4.p01
+**************************************************
+
+
+**************************************************
+          Decay Options: 
+Decay J/psi
+1.000    pi+ pi- pi0      PHSP;
+Enddecay
+Decay pi0
+1.0000     e+  e- gamma                     DIY;
+Enddecay
+End
+
+**************************************************
+
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+event  number:  0
+ApplicationMgr       INFO Application Manager Stopped successfully
+total number:              5000
+nGood==4, nCharge==0:      2141
+Photon Selection :         1859
+Pass Pid:                  1673
+e+e- vertex fit:           1656
+4C Kinematic fit           1256
+Good photon selection      1247
+ApplicationMgr       INFO Application Manager Finalized successfully
+ApplicationMgr       INFO Application Manager Terminated successfully
+533.981u 8.889s 9:11.05 98.5%	0+0k 3760+6984io 56pf+0w

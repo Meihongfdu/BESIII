@@ -1,0 +1,6 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr.DLLs += {"DstoetamvAlg"};
+ApplicationMgr.TopAlg += { "Dstoetamv" };
+
+
+Dstoetamv.mctag  = 0;

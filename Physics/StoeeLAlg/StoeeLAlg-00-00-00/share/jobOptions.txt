@@ -1,0 +1,46 @@
+ApplicationMgr.DLLs += {"StoeeLAlg"};
+ApplicationMgr.TopAlg += { "StoeeLAlg" };
+
+ApplicationMgr.DLLs += {"MCTruthMatchSvc" };
+ApplicationMgr.DLLs += {"McDecayModeSvc" };
+//ApplicationMgr.DLLs += {"Selector" };
+ApplicationMgr.ExtSvc      += {"McDecayModeSvc/McDecayModeSvc"};
+McDecayModeSvc.pdt_file = "$BESEVTGENROOT/share/pdt.table";
+McDecayModeSvc.NoTracingList = { 321, -321, 211, -211 };
+VeeVertex.LambdaReconstruction = false ;
+VeeVertex.KShortReconstruction = true ;
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+StoeeLAlg.Debug = false;
+StoeeLAlg.FID = { 11, -11, 3122, 22, -3122 };
+StoeeLAlg.InfL = 0 ;
+StoeeLAlg.DoMatch = true ;
+StoeeLAlg.Mother = 443;
+StoeeLAlg.MinChargedTracks =6;
+StoeeLAlg.MinShowers = 1;
+
+// J/psi
+StoeeLAlgSignalSelector.UseRecMassCuts = false;
+StoeeLAlgSignalSelector.UseMassCuts = false;
+
+// proton
+StoeeLAlgProtonSelector.RxyCut = 999999;
+StoeeLAlgProtonSelector.Vz0Cut = 20;
+StoeeLAlgProtonSelector.DoPID = false;
+
+// pions
+StoeeLAlgPionSelector.RxyCut = 999999;
+StoeeLAlgPionSelector.Vz0Cut = 20;
+StoeeLAlgPionSelector.DoPID = false;
+
+// electron
+StoeeLAlgElectronSelector.RxyCut = 1.0;
+StoeeLAlgElectronSelector.Vz0Cut = 10.0;
+StoeeLAlgElectronSelector.doPid = false;
+
+//photon
+StoeeLAlgPhotonSelector.ApplyDangCut = false;
+
+// Lambda
+StoeeLAlgLambdaSelector.MinMassCut = 1.095;
+StoeeLAlgLambdaSelector.MaxMassCut = 1.135;
+StoeeLAlgLambdaSelector.MaxChisq = 200;

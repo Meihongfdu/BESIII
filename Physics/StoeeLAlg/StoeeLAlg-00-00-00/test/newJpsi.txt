@@ -1,0 +1,43 @@
+
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$RUNEVENTNUMBERALGROOT/share/jobOptions_RunEventNumber.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$PI0ETATOGGRECALGROOT/share/jobOptions_Pi0EtaToGGRec.txt"
+#include "$VEEVERTEXALGROOT/share/jobOptions_veeVertex.txt"
+#include "$PSI2STOHHHALGROOT/share/jobOptions.txt"
+
+StoeeLAlg.FID = {3122, -3122, 221};
+StoeeLAlg.InfL = 0;
+StoeeLAlg.FillMCInf = false;
+StoeeLAlg.DoMatch = false;
+StoeeLAlg.BeamE = 3.097 ;
+StoeeLAlg.Mother = 443 ;
+StoeeLAlg.MinChargedTracks = 4;
+
+StoeeLAlgPionSelector.RxyCut = 10;
+StoeeLAlgPionSelector.Vz0Cut = 20;
+
+StoeeLAlgProtonSelector.RxyCut = 10;
+StoeeLAlgProtonSelector.Vz0Cut = 20;
+
+StoeeLAlgGoodChrTrkSelector.RxyCut = 10;
+StoeeLAlgGoodChrTrkSelector.Vz0Cut  = 20;
+
+// Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = 100000;
+
+// Set output level threshold (2=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 5;
+
+ApplicationMgr.HistogramPersistency = "ROOT";
+
+EventCnvSvc.digiRootInputFile = {
+ " /besfs3/offline/data/703-1/jpsi/round11/dst/171209/run_0052945_All_file001_SFO-1.dst ",
+"/besfs3/offline/data/703-1/jpsi/round11/dst/171209/run_0052945_All_file033_SFO-1.dst"
+};
+
+NTupleSvc.output={
+  "FILE  DATAFILE='1.root' OPT='new' TYP='ROOT' "
+};
