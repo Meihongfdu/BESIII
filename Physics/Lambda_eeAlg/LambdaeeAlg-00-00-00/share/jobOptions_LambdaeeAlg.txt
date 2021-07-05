@@ -1,0 +1,5 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr.DLLs += {"LambdaeeAlg"};
+ApplicationMgr.TopAlg += { "Lambdaee" };
+
+Lambdaee.mctag = 0;

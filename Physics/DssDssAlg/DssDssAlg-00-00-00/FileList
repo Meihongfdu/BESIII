@@ -1,0 +1,10 @@
+./src/Dstof0mv.cxx
+./src/ReadBeamInfFromDb.cxx
+./src/Match.cxx
+./src/components/Dstof0mvAlg_load.cxx
+./src/components/Dstof0mvAlg_entries.cxx
+./Dstof0mvAlg/ReadBeamInfFromDb.h
+./Dstof0mvAlg/Dstof0mv.h
+./Dstof0mvAlg/Match.h
+./cmt/requirements
+./share/jobOptions_Dstof0mv.txt

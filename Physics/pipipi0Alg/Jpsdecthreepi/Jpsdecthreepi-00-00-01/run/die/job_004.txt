@@ -1,0 +1,46 @@
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+#include "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/pipipi/JobOption.txt"
+
+// Input REC or DST file name
+
+EventCnvSvc.digiRootInputFile = {
+
+
+
+
+
+"/besfs/groups/dqa/users/vindy/die_dst/die_128.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_129.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_12.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_130.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_131.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_132.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_133.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_134.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_135.dst"
+,
+"/besfs/groups/dqa/users/vindy/die_dst/die_136.dst"
+};
+
+// Set output level threshold (1=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 6;
+
+// Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = -1;
+
+ApplicationMgr.HistogramPersistency = "ROOT";
+NTupleSvc.Output = { "FILE1 DATAFILE='
+
+
+/besfs/groups/jpsi/jpsigroup/user/vindy/syst/die004.root' OPT='NEW' TYP='ROOT'"};

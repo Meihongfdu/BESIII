@@ -1,0 +1,10 @@
+boss -q job_001.txt
+boss -q job_002.txt
+boss -q job_003.txt
+boss -q job_004.txt
+boss -q job_005.txt
+boss -q job_006.txt
+boss -q job_007.txt
+boss -q job_008.txt
+boss -q job_009.txt
+boss -q job_010.txt

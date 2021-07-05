@@ -1,0 +1,2768 @@
+
+**************************************************
+               BOSS version: 6.6.4
+************** BESIII Collaboration **************
+
+JobOptionsSvc        INFO 
+//GP:================================================================================
+//GP: include "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/job_122.txt" (0,0)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Event/RootIO/RootIO-00-01-31/share/jobOptions_ReadRec.txt" (1,10)
+ApplicationMgr.DLLs +=  [ "RecMakerAlg" ] ;                             //GP: (1,1)
+ApplicationMgr.TopAlg +=  [ "RecMakerAlg" ] ;                           //GP: (1,1)
+ApplicationMgr.DLLs +=  [ "RootCnvSvc" ] ;                              //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "EvtPersistencySvc/EventPersistencySvc" ] ; //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "RootEvtSelector/EventSelector" , "RootCnvSvc/EventCnvSvc" ] ;//GP: (1,1)
+EventPersistencySvc.CnvServices +=  [ "EventCnvSvc" ] ;                 //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Event/RootIO/RootIO-00-01-31/share/jobOptions_ReadRec.txt" (11,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt" (2,10)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Control/OfflineEventLoopMgr/OfflineEventLoopMgr-00-00-13/share/OfflineEventLoopMgr_Option.txt" (1,10)
+ApplicationMgr.DLLs +=  [ "OfflineEventLoopMgr" ] ;                     //GP: (1,1)
+ApplicationMgr.EventLoop = "OfflineEventLoopMgr";                       //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Control/OfflineEventLoopMgr/OfflineEventLoopMgr-00-00-13/share/OfflineEventLoopMgr_Option.txt" (3,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Database/DatabaseSvc/DatabaseSvc-00-00-19/share/DatabaseConfig.txt" (2,10)
+ApplicationMgr.DLLs +=  [ "DatabaseSvc" ] ;                             //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "DatabaseSvc" ] ;                           //GP: (1,1)
+DatabaseSvc.DbType = "mysql";                                           //GP: (1,1)
+DatabaseSvc.Host = "bes3db2.ihep.ac.cn";                                //GP: (1,1)
+DatabaseSvc.User = "guest";                                             //GP: (1,1)
+DatabaseSvc.Passwd = "guestpass";                                       //GP: (1,1)
+DatabaseSvc.SqliteDbPath = "$BESCALDATA/database";                      //GP: (1,1)
+DatabaseSvc.ReuseConnection = 1;                                        //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Database/DatabaseSvc/DatabaseSvc-00-00-19/share/DatabaseConfig.txt" (10,1)
+ApplicationMgr.DLLs +=  [ "VertexFit" ] ;                               //GP: (2,10)
+ApplicationMgr.ExtSvc +=  [ "VertexDbSvc" ] ;                           //GP: (2,10)
+VertexDbSvc.BossRelease = "6.6.4";                                      //GP: (2,10)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt" (9,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/share/MagneticField.txt" (3,10)
+ApplicationMgr.DLLs +=  [ "MagneticField" ] ;                           //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "MagneticFieldSvc" ] ;                      //GP: (1,1)
+MagneticFieldSvc.IfRealField = 1;                                       //GP: (1,1)
+MagneticFieldSvc.OutLevel = 1;                                          //GP: (1,1)
+MagneticFieldSvc.GridDistance = 5;                                      //GP: (1,1)
+MagneticFieldSvc.RunMode = 3;                                           //GP: (1,1)
+MagneticFieldSvc.Cur_SCQ1_55 = 349.4;                                   //GP: (1,1)
+MagneticFieldSvc.Cur_SCQ1_89 = 426.2;                                   //GP: (1,1)
+MagneticFieldSvc.Cur_SCQ2_10 = 474.2;                                   //GP: (1,1)
+MagneticFieldSvc.UseDBFlag = 1;                                         //GP: (1,1)
+MagneticFieldSvc.TurnOffField = 0;                                      //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/share/MagneticField.txt" (30,1)
+//GP: include "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/PhotonCor/AbsCor/AbsCor-00-00-28/share/jobOptions_AbsCor.txt" (4,10)
+ApplicationMgr.DLLs +=  [ "EmcRecGeoSvc" ] ;                            //GP: (1,1)
+ApplicationMgr.ExtSvc +=  [ "EmcRecGeoSvc" ] ;                          //GP: (1,1)
+ApplicationMgr.DLLs +=  [ "AbsCor" ] ;                                  //GP: (1,1)
+ApplicationMgr.TopAlg +=  [ "AbsCor" ] ;                                //GP: (1,1)
+AbsCor.NTupleOut = 0;                                                   //GP: (1,1)
+AbsCor.UseTof = 1;                                                      //GP: (1,1)
+AbsCor.DoDataCor = 1;                                                   //GP: (1,1)
+//GP: end  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/PhotonCor/AbsCor/AbsCor-00-00-28/share/jobOptions_AbsCor.txt" (13,1)
+//GP: include "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt" (5,10)
+//GP: skip already included file  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt" (1,10)
+ApplicationMgr.DLLs +=  [ "Jpsdecthreepi" ] ;                           //GP: (1,10)
+ApplicationMgr.TopAlg +=  [ "Jpsdecthreepi" ] ;                         //GP: (1,10)
+Jpsdecthreepi.TestMC = 1;                                               //GP: (1,10)
+Jpsdecthreepi.TestJPSMC = 1;                                            //GP: (1,10)
+//GP: end  "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt" (8,33)
+EventCnvSvc.digiRootInputFile =  [ "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27630_file6.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27630_file7.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file1.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file2.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file3.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file4.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file5.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file6.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file7.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file8.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file9.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file1.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file2.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file3.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file4.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file5.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file6.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file7.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file8.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file1.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file2.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file3.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file4.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file5.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file6.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file7.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file8.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file10.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file1.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file2.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file3.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file4.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file5.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file6.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file7.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file8.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file9.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file1.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file2.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file3.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file4.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file1.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file2.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file3.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file4.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file5.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file6.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file7.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file8.dst" , "/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file9.dst" ] ;//GP: (5,10)
+MessageSvc.OutputLevel = 6;                                             //GP: (5,10)
+ApplicationMgr.EvtMax = -1;                                             //GP: (5,10)
+ApplicationMgr.HistogramPersistency = "ROOT";                           //GP: (5,10)
+NTupleSvc.Output =  [ "FILE1 DATAFILE='   /besfs/groups/jpsi/jpsigroup/user/vindy/syst/Jpsi_inc122.root' OPT='NEW' TYP='ROOT'" ] ;//GP: (5,10)
+//GP: end  "/besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/job_122.txt" (127,1)
+//GP:================================================================================
+
+JobOptionsSvc        INFO Job options successfully read in from /besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/job_122.txt
+JobOptionsSvc     WARNING /besfs/users/vindy/cmt6.6.4/workarea/Jpsdecthreepi/Jpsdecthreepi-00-00-01/run/jpsinc/JobOption.txt(1,10) : WARNING #0 : Skip already included file  "/afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/Analysis/VertexFit/VertexFit-00-02-68/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr    SUCCESS 
+====================================================================================================================================
+                                                   Welcome to ApplicationMgr $Revision: 1.77 $
+                                          running on bws0258.ihep.ac.cn on Fri Mar  4 13:46:31 2016
+====================================================================================================================================
+
+[1mRooFit v3.00a -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2009 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+ApplicationMgr       INFO Successfully loaded modules : RecMakerAlg, RootCnvSvc, OfflineEventLoopMgr, DatabaseSvc, VertexFit, MagneticField, EmcRecGeoSvc, AbsCor, Jpsdecthreepi
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/barIronpar.txt
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/barAirpar.txt
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/endIronpar.txt
+*** Read field map: /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/MagneticField/MagneticField-00-01-36/dat/endAirpar.txt
+DatabaseSvc: Connected to MySQL database
+Construct Emc from GdmlFile /afs/ihep.ac.cn/bes3/offline/Boss/6.6.4/DetectorDescription/GdmlManagement/GdmlManagement-00-00-31/dat/Emc.gdml
+SAXProcessor type ROOT
+SAXProcessor requires type 2
+Top Volume not found 
+Find logicalEMC!
+gGeoManager success!
+mccor = 0
+ApplicationMgr       INFO Application Manager Initialized successfully
+ApplicationMgr       INFO Application Manager Started successfully
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27630_file6.dst
+          BOSS version: 6.6.4
+**************************************************
+
+
+**************************************************
+          JobOptions for this data file: 
+
+RealizationSvc.InitEvtID=250001;
+#include "$OFFLINEEVENTLOOPMGRROOT/share/OfflineEventLoopMgr_Option.txt"
+#include "$KKMCROOT/share/jobOptions_KKMC.txt"
+KKMC.CMSEnergy= 3.097;
+KKMC.BeamEnergySpread=0.0008;
+KKMC.NumberOfEventPrinted=10;
+KKMC.GenerateJPsi=true;
+KKMC.RadiationCorrection= 1;
+#include "$BESEVTGENROOT/share/BesEvtGen.txt"
+BesRndmGenSvc.RndmSeed=665302;
+#include "$BESSIMROOT/share/G4Svc_BesSim.txt"
+#include "$CALIBSVCROOT/share/calibConfig_sim.txt"
+RealizationSvc.RunIdList={-27630};
+#include "$ROOTIOROOT/share/jobOptions_Digi2Root.txt"
+RootCnvSvc.digiRootOutputFile="/besfs2/offline/data/664-1/jpsi/12mc/raw/jpsi2012_stream001_run27630_file6.rtraw";
+MessageSvc.OutputLevel= 6;
+ApplicationMgr.EvtMax=50000;
+
+          end of the jobOptions file 
+**************************************************
+
+#include "$ROOTIOROOT/share/jobOptions_ReadRoot.txt"
+#include "$OFFLINEEVENTLOOPMGRROOT/share/OfflineEventLoopMgr_Option.txt"
+#include "$BESEVENTMIXERROOT/share/jobOptions_EventMixer_rec.txt"
+#include "$CALIBSVCROOT/share/job-CalibData.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ESTIMEALGROOT/share/job_EsTimeAlg.txt"
+#include "$MDCXRECOROOT/share/jobOptions_MdcPatTsfRec.txt"
+#include "$KALFITALGROOT/share/job_kalfit_numf_data.txt"
+#include "$MDCDEDXALGROOT/share/job_dedx_all.txt"
+#include "$TRKEXTALGROOT/share/TrkExtAlgOption.txt"
+#include "$TOFRECROOT/share/jobOptions_TofRec.txt"
+#include "$TOFENERGYRECROOT/share/TofEnergyRecOptions_MC.txt"
+#include "$EMCRECROOT/share/EmcRecOptions.txt"
+#include "$MUCRECALGROOT/share/jobOptions_MucRec.txt"
+#include "$EVENTASSEMBLYROOT/share/EventAssembly.txt"
+#include "$PRIMARYVERTEXALGROOT/share/jobOptions_kalman.txt"
+#include "$VEEVERTEXALGROOT/share/jobOptions_veeVertex.txt"
+#include "$HLTMAKERALGROOT/share/jobOptions_HltMakerAlg.txt"
+#include "$ROOTIOROOT/share/jobOptions_Dst2Root.txt"
+#include "$CALIBSVCROOT/share/calibConfig_rec_mc.txt"
+RealizationSvc.SftVer="6.6.3";      
+BesRndmGenSvc.RndmSeed=66430341;
+MessageSvc.OutputLevel= 6; 
+EventCnvSvc.digiRootInputFile={"/besfs2/offline/data/664-1/jpsi/12mc/raw/jpsi2012_stream001_run27630_file6.rtraw"};
+EventCnvSvc.digiRootOutputFile="/besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27630_file6.dst";
+ApplicationMgr.EvtMax= 5000000;
+
+          end of the jobOptions file 
+**************************************************
+
+Using the SftVer and ParVer (6.6.3, 1) for run 27630. 
+event  number:  251000
+event  number:  252000
+event  number:  253000
+event  number:  254000
+event  number:  255000
+event  number:  256000
+event  number:  257000
+event  number:  258000
+event  number:  259000
+event  number:  260000
+event  number:  261000
+event  number:  262000
+event  number:  263000
+event  number:  264000
+event  number:  265000
+event  number:  266000
+event  number:  267000
+event  number:  268000
+event  number:  269000
+event  number:  270000
+event  number:  271000
+event  number:  272000
+event  number:  273000
+event  number:  274000
+event  number:  275000
+event  number:  276000
+event  number:  277000
+event  number:  278000
+event  number:  279000
+event  number:  280000
+event  number:  281000
+event  number:  282000
+event  number:  283000
+event  number:  284000
+event  number:  285000
+event  number:  286000
+event  number:  287000
+event  number:  288000
+event  number:  289000
+event  number:  290000
+event  number:  291000
+event  number:  292000
+event  number:  293000
+event  number:  294000
+event  number:  295000
+event  number:  296000
+event  number:  297000
+event  number:  298000
+event  number:  299000
+event  number:  300000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27630_file7.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  301000
+event  number:  302000
+event  number:  303000
+event  number:  304000
+event  number:  305000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file1.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  1000
+event  number:  2000
+event  number:  3000
+event  number:  4000
+event  number:  5000
+event  number:  6000
+event  number:  7000
+event  number:  8000
+event  number:  9000
+event  number:  10000
+event  number:  11000
+event  number:  12000
+event  number:  13000
+event  number:  14000
+event  number:  15000
+event  number:  16000
+event  number:  17000
+event  number:  18000
+event  number:  19000
+event  number:  20000
+event  number:  21000
+event  number:  22000
+event  number:  23000
+event  number:  24000
+event  number:  25000
+event  number:  26000
+event  number:  27000
+event  number:  28000
+event  number:  29000
+event  number:  30000
+event  number:  31000
+event  number:  32000
+event  number:  33000
+event  number:  34000
+event  number:  35000
+event  number:  36000
+event  number:  37000
+event  number:  38000
+event  number:  39000
+event  number:  40000
+event  number:  41000
+event  number:  42000
+event  number:  43000
+event  number:  44000
+event  number:  45000
+event  number:  46000
+event  number:  47000
+event  number:  48000
+event  number:  49000
+event  number:  50000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file2.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  51000
+event  number:  52000
+event  number:  53000
+event  number:  54000
+event  number:  55000
+event  number:  56000
+event  number:  57000
+event  number:  58000
+event  number:  59000
+event  number:  60000
+event  number:  61000
+event  number:  62000
+event  number:  63000
+event  number:  64000
+event  number:  65000
+event  number:  66000
+event  number:  67000
+event  number:  68000
+event  number:  69000
+event  number:  70000
+event  number:  71000
+event  number:  72000
+event  number:  73000
+event  number:  74000
+event  number:  75000
+event  number:  76000
+event  number:  77000
+event  number:  78000
+event  number:  79000
+event  number:  80000
+event  number:  81000
+event  number:  82000
+event  number:  83000
+event  number:  84000
+event  number:  85000
+event  number:  86000
+event  number:  87000
+event  number:  88000
+event  number:  89000
+event  number:  90000
+event  number:  91000
+event  number:  92000
+event  number:  93000
+event  number:  94000
+event  number:  95000
+event  number:  96000
+event  number:  97000
+event  number:  98000
+event  number:  99000
+event  number:  100000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file3.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  101000
+event  number:  102000
+event  number:  103000
+event  number:  104000
+event  number:  105000
+event  number:  106000
+event  number:  107000
+event  number:  108000
+event  number:  109000
+event  number:  110000
+event  number:  111000
+event  number:  112000
+event  number:  113000
+event  number:  114000
+event  number:  115000
+event  number:  116000
+event  number:  117000
+event  number:  118000
+event  number:  119000
+event  number:  120000
+event  number:  121000
+event  number:  122000
+event  number:  123000
+event  number:  124000
+event  number:  125000
+event  number:  126000
+event  number:  127000
+event  number:  128000
+event  number:  129000
+event  number:  130000
+event  number:  131000
+event  number:  132000
+event  number:  133000
+event  number:  134000
+event  number:  135000
+event  number:  136000
+event  number:  137000
+event  number:  138000
+event  number:  139000
+event  number:  140000
+event  number:  141000
+event  number:  142000
+event  number:  143000
+event  number:  144000
+event  number:  145000
+event  number:  146000
+event  number:  147000
+event  number:  148000
+event  number:  149000
+event  number:  150000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file4.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  151000
+event  number:  152000
+event  number:  153000
+event  number:  154000
+event  number:  155000
+event  number:  156000
+event  number:  157000
+event  number:  158000
+event  number:  159000
+event  number:  160000
+event  number:  161000
+event  number:  162000
+event  number:  163000
+event  number:  164000
+event  number:  165000
+event  number:  166000
+event  number:  167000
+event  number:  168000
+event  number:  169000
+event  number:  170000
+event  number:  171000
+event  number:  172000
+event  number:  173000
+event  number:  174000
+event  number:  175000
+event  number:  176000
+event  number:  177000
+event  number:  178000
+event  number:  179000
+event  number:  180000
+event  number:  181000
+event  number:  182000
+event  number:  183000
+event  number:  184000
+event  number:  185000
+event  number:  186000
+event  number:  187000
+event  number:  188000
+event  number:  189000
+event  number:  190000
+event  number:  191000
+event  number:  192000
+event  number:  193000
+event  number:  194000
+event  number:  195000
+event  number:  196000
+event  number:  197000
+event  number:  198000
+event  number:  199000
+event  number:  200000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file5.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  201000
+event  number:  202000
+event  number:  203000
+event  number:  204000
+event  number:  205000
+event  number:  206000
+event  number:  207000
+event  number:  208000
+event  number:  209000
+event  number:  210000
+event  number:  211000
+event  number:  212000
+event  number:  213000
+event  number:  214000
+event  number:  215000
+event  number:  216000
+event  number:  217000
+event  number:  218000
+event  number:  219000
+event  number:  220000
+event  number:  221000
+event  number:  222000
+event  number:  223000
+event  number:  224000
+event  number:  225000
+event  number:  226000
+event  number:  227000
+event  number:  228000
+event  number:  229000
+event  number:  230000
+event  number:  231000
+event  number:  232000
+event  number:  233000
+event  number:  234000
+event  number:  235000
+event  number:  236000
+event  number:  237000
+event  number:  238000
+event  number:  239000
+event  number:  240000
+event  number:  241000
+event  number:  242000
+event  number:  243000
+event  number:  244000
+event  number:  245000
+event  number:  246000
+event  number:  247000
+event  number:  248000
+event  number:  249000
+event  number:  250000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file6.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  251000
+event  number:  252000
+event  number:  253000
+event  number:  254000
+event  number:  255000
+event  number:  256000
+event  number:  257000
+event  number:  258000
+event  number:  259000
+event  number:  260000
+event  number:  261000
+event  number:  262000
+event  number:  263000
+event  number:  264000
+event  number:  265000
+event  number:  266000
+event  number:  267000
+event  number:  268000
+event  number:  269000
+event  number:  270000
+event  number:  271000
+event  number:  272000
+event  number:  273000
+event  number:  274000
+event  number:  275000
+event  number:  276000
+event  number:  277000
+event  number:  278000
+event  number:  279000
+event  number:  280000
+event  number:  281000
+event  number:  282000
+event  number:  283000
+event  number:  284000
+event  number:  285000
+event  number:  286000
+event  number:  287000
+event  number:  288000
+event  number:  289000
+event  number:  290000
+event  number:  291000
+event  number:  292000
+event  number:  293000
+event  number:  294000
+event  number:  295000
+event  number:  296000
+event  number:  297000
+event  number:  298000
+event  number:  299000
+event  number:  300000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file7.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  301000
+event  number:  302000
+event  number:  303000
+event  number:  304000
+event  number:  305000
+event  number:  306000
+event  number:  307000
+event  number:  308000
+event  number:  309000
+event  number:  310000
+event  number:  311000
+event  number:  312000
+event  number:  313000
+event  number:  314000
+event  number:  315000
+event  number:  316000
+event  number:  317000
+event  number:  318000
+event  number:  319000
+event  number:  320000
+event  number:  321000
+event  number:  322000
+event  number:  323000
+event  number:  324000
+event  number:  325000
+event  number:  326000
+event  number:  327000
+event  number:  328000
+event  number:  329000
+event  number:  330000
+event  number:  331000
+event  number:  332000
+event  number:  333000
+event  number:  334000
+event  number:  335000
+event  number:  336000
+event  number:  337000
+event  number:  338000
+event  number:  339000
+event  number:  340000
+event  number:  341000
+event  number:  342000
+event  number:  343000
+event  number:  344000
+event  number:  345000
+event  number:  346000
+event  number:  347000
+event  number:  348000
+event  number:  349000
+event  number:  350000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file8.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  351000
+event  number:  352000
+event  number:  353000
+event  number:  354000
+event  number:  355000
+event  number:  356000
+event  number:  357000
+event  number:  358000
+event  number:  359000
+event  number:  360000
+event  number:  361000
+event  number:  362000
+event  number:  363000
+event  number:  364000
+event  number:  365000
+event  number:  366000
+event  number:  367000
+event  number:  368000
+event  number:  369000
+event  number:  370000
+event  number:  371000
+event  number:  372000
+event  number:  373000
+event  number:  374000
+event  number:  375000
+event  number:  376000
+event  number:  377000
+event  number:  378000
+event  number:  379000
+event  number:  380000
+event  number:  381000
+event  number:  382000
+event  number:  383000
+event  number:  384000
+event  number:  385000
+event  number:  386000
+event  number:  387000
+event  number:  388000
+event  number:  389000
+event  number:  390000
+event  number:  391000
+event  number:  392000
+event  number:  393000
+event  number:  394000
+event  number:  395000
+event  number:  396000
+event  number:  397000
+event  number:  398000
+event  number:  399000
+event  number:  400000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27631_file9.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  401000
+event  number:  402000
+event  number:  403000
+event  number:  404000
+event  number:  405000
+event  number:  406000
+event  number:  407000
+event  number:  408000
+event  number:  409000
+event  number:  410000
+event  number:  411000
+event  number:  412000
+event  number:  413000
+event  number:  414000
+event  number:  415000
+event  number:  416000
+event  number:  417000
+event  number:  418000
+event  number:  419000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file1.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  1000
+event  number:  2000
+event  number:  3000
+event  number:  4000
+event  number:  5000
+event  number:  6000
+event  number:  7000
+event  number:  8000
+event  number:  9000
+event  number:  10000
+event  number:  11000
+event  number:  12000
+event  number:  13000
+event  number:  14000
+event  number:  15000
+event  number:  16000
+event  number:  17000
+event  number:  18000
+event  number:  19000
+event  number:  20000
+event  number:  21000
+event  number:  22000
+event  number:  23000
+event  number:  24000
+event  number:  25000
+event  number:  26000
+event  number:  27000
+event  number:  28000
+event  number:  29000
+event  number:  30000
+event  number:  31000
+event  number:  32000
+event  number:  33000
+event  number:  34000
+event  number:  35000
+event  number:  36000
+event  number:  37000
+event  number:  38000
+event  number:  39000
+event  number:  40000
+event  number:  41000
+event  number:  42000
+event  number:  43000
+event  number:  44000
+event  number:  45000
+event  number:  46000
+event  number:  47000
+event  number:  48000
+event  number:  49000
+event  number:  50000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file2.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  51000
+event  number:  52000
+event  number:  53000
+event  number:  54000
+event  number:  55000
+event  number:  56000
+event  number:  57000
+event  number:  58000
+event  number:  59000
+event  number:  60000
+event  number:  61000
+event  number:  62000
+event  number:  63000
+event  number:  64000
+event  number:  65000
+event  number:  66000
+event  number:  67000
+event  number:  68000
+event  number:  69000
+event  number:  70000
+event  number:  71000
+event  number:  72000
+event  number:  73000
+event  number:  74000
+event  number:  75000
+event  number:  76000
+event  number:  77000
+event  number:  78000
+event  number:  79000
+event  number:  80000
+event  number:  81000
+event  number:  82000
+event  number:  83000
+event  number:  84000
+event  number:  85000
+event  number:  86000
+event  number:  87000
+event  number:  88000
+event  number:  89000
+event  number:  90000
+event  number:  91000
+event  number:  92000
+event  number:  93000
+event  number:  94000
+event  number:  95000
+event  number:  96000
+event  number:  97000
+event  number:  98000
+event  number:  99000
+event  number:  100000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file3.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  101000
+event  number:  102000
+event  number:  103000
+event  number:  104000
+event  number:  105000
+event  number:  106000
+event  number:  107000
+event  number:  108000
+event  number:  109000
+event  number:  110000
+event  number:  111000
+event  number:  112000
+event  number:  113000
+event  number:  114000
+event  number:  115000
+event  number:  116000
+event  number:  117000
+event  number:  118000
+event  number:  119000
+event  number:  120000
+event  number:  121000
+event  number:  122000
+event  number:  123000
+event  number:  124000
+event  number:  125000
+event  number:  126000
+event  number:  127000
+event  number:  128000
+event  number:  129000
+event  number:  130000
+event  number:  131000
+event  number:  132000
+event  number:  133000
+event  number:  134000
+event  number:  135000
+event  number:  136000
+event  number:  137000
+event  number:  138000
+event  number:  139000
+event  number:  140000
+event  number:  141000
+event  number:  142000
+event  number:  143000
+event  number:  144000
+event  number:  145000
+event  number:  146000
+event  number:  147000
+event  number:  148000
+event  number:  149000
+event  number:  150000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file4.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  151000
+event  number:  152000
+event  number:  153000
+event  number:  154000
+event  number:  155000
+event  number:  156000
+event  number:  157000
+event  number:  158000
+event  number:  159000
+event  number:  160000
+event  number:  161000
+event  number:  162000
+event  number:  163000
+event  number:  164000
+event  number:  165000
+event  number:  166000
+event  number:  167000
+event  number:  168000
+event  number:  169000
+event  number:  170000
+event  number:  171000
+event  number:  172000
+event  number:  173000
+event  number:  174000
+event  number:  175000
+event  number:  176000
+event  number:  177000
+event  number:  178000
+event  number:  179000
+event  number:  180000
+event  number:  181000
+event  number:  182000
+event  number:  183000
+event  number:  184000
+event  number:  185000
+event  number:  186000
+event  number:  187000
+event  number:  188000
+event  number:  189000
+event  number:  190000
+event  number:  191000
+event  number:  192000
+event  number:  193000
+event  number:  194000
+event  number:  195000
+event  number:  196000
+event  number:  197000
+event  number:  198000
+event  number:  199000
+event  number:  200000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file5.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  201000
+event  number:  202000
+event  number:  203000
+event  number:  204000
+event  number:  205000
+event  number:  206000
+event  number:  207000
+event  number:  208000
+event  number:  209000
+event  number:  210000
+event  number:  211000
+event  number:  212000
+event  number:  213000
+event  number:  214000
+event  number:  215000
+event  number:  216000
+event  number:  217000
+event  number:  218000
+event  number:  219000
+event  number:  220000
+event  number:  221000
+event  number:  222000
+event  number:  223000
+event  number:  224000
+event  number:  225000
+event  number:  226000
+event  number:  227000
+event  number:  228000
+event  number:  229000
+event  number:  230000
+event  number:  231000
+event  number:  232000
+event  number:  233000
+event  number:  234000
+event  number:  235000
+event  number:  236000
+event  number:  237000
+event  number:  238000
+event  number:  239000
+event  number:  240000
+event  number:  241000
+event  number:  242000
+event  number:  243000
+event  number:  244000
+event  number:  245000
+event  number:  246000
+event  number:  247000
+event  number:  248000
+event  number:  249000
+event  number:  250000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file6.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  251000
+event  number:  252000
+event  number:  253000
+event  number:  254000
+event  number:  255000
+event  number:  256000
+event  number:  257000
+event  number:  258000
+event  number:  259000
+event  number:  260000
+event  number:  261000
+event  number:  262000
+event  number:  263000
+event  number:  264000
+event  number:  265000
+event  number:  266000
+event  number:  267000
+event  number:  268000
+event  number:  269000
+event  number:  270000
+event  number:  271000
+event  number:  272000
+event  number:  273000
+event  number:  274000
+event  number:  275000
+event  number:  276000
+event  number:  277000
+event  number:  278000
+event  number:  279000
+event  number:  280000
+event  number:  281000
+event  number:  282000
+event  number:  283000
+event  number:  284000
+event  number:  285000
+event  number:  286000
+event  number:  287000
+event  number:  288000
+event  number:  289000
+event  number:  290000
+event  number:  291000
+event  number:  292000
+event  number:  293000
+event  number:  294000
+event  number:  295000
+event  number:  296000
+event  number:  297000
+event  number:  298000
+event  number:  299000
+event  number:  300000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file7.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  301000
+event  number:  302000
+event  number:  303000
+event  number:  304000
+event  number:  305000
+event  number:  306000
+event  number:  307000
+event  number:  308000
+event  number:  309000
+event  number:  310000
+event  number:  311000
+event  number:  312000
+event  number:  313000
+event  number:  314000
+event  number:  315000
+event  number:  316000
+event  number:  317000
+event  number:  318000
+event  number:  319000
+event  number:  320000
+event  number:  321000
+event  number:  322000
+event  number:  323000
+event  number:  324000
+event  number:  325000
+event  number:  326000
+event  number:  327000
+event  number:  328000
+event  number:  329000
+event  number:  330000
+event  number:  331000
+event  number:  332000
+event  number:  333000
+event  number:  334000
+event  number:  335000
+event  number:  336000
+event  number:  337000
+event  number:  338000
+event  number:  339000
+event  number:  340000
+event  number:  341000
+event  number:  342000
+event  number:  343000
+event  number:  344000
+event  number:  345000
+event  number:  346000
+event  number:  347000
+event  number:  348000
+event  number:  349000
+event  number:  350000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27632_file8.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  351000
+event  number:  352000
+event  number:  353000
+event  number:  354000
+event  number:  355000
+event  number:  356000
+event  number:  357000
+event  number:  358000
+event  number:  359000
+event  number:  360000
+event  number:  361000
+event  number:  362000
+event  number:  363000
+event  number:  364000
+event  number:  365000
+event  number:  366000
+event  number:  367000
+event  number:  368000
+event  number:  369000
+event  number:  370000
+event  number:  371000
+event  number:  372000
+event  number:  373000
+event  number:  374000
+event  number:  375000
+event  number:  376000
+event  number:  377000
+event  number:  378000
+event  number:  379000
+event  number:  380000
+event  number:  381000
+event  number:  382000
+event  number:  383000
+event  number:  384000
+event  number:  385000
+event  number:  386000
+event  number:  387000
+event  number:  388000
+event  number:  389000
+event  number:  390000
+event  number:  391000
+event  number:  392000
+event  number:  393000
+event  number:  394000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file1.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  1000
+event  number:  2000
+event  number:  3000
+event  number:  4000
+event  number:  5000
+event  number:  6000
+event  number:  7000
+event  number:  8000
+event  number:  9000
+event  number:  10000
+event  number:  11000
+event  number:  12000
+event  number:  13000
+event  number:  14000
+event  number:  15000
+event  number:  16000
+event  number:  17000
+event  number:  18000
+event  number:  19000
+event  number:  20000
+event  number:  21000
+event  number:  22000
+event  number:  23000
+event  number:  24000
+event  number:  25000
+event  number:  26000
+event  number:  27000
+event  number:  28000
+event  number:  29000
+event  number:  30000
+event  number:  31000
+event  number:  32000
+event  number:  33000
+event  number:  34000
+event  number:  35000
+event  number:  36000
+event  number:  37000
+event  number:  38000
+event  number:  39000
+event  number:  40000
+event  number:  41000
+event  number:  42000
+event  number:  43000
+event  number:  44000
+event  number:  45000
+event  number:  46000
+event  number:  47000
+event  number:  48000
+event  number:  49000
+event  number:  50000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file2.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  51000
+event  number:  52000
+event  number:  53000
+event  number:  54000
+event  number:  55000
+event  number:  56000
+event  number:  57000
+event  number:  58000
+event  number:  59000
+event  number:  60000
+event  number:  61000
+event  number:  62000
+event  number:  63000
+event  number:  64000
+event  number:  65000
+event  number:  66000
+event  number:  67000
+event  number:  68000
+event  number:  69000
+event  number:  70000
+event  number:  71000
+event  number:  72000
+event  number:  73000
+event  number:  74000
+event  number:  75000
+event  number:  76000
+event  number:  77000
+event  number:  78000
+event  number:  79000
+event  number:  80000
+event  number:  81000
+event  number:  82000
+event  number:  83000
+event  number:  84000
+event  number:  85000
+event  number:  86000
+event  number:  87000
+event  number:  88000
+event  number:  89000
+event  number:  90000
+event  number:  91000
+event  number:  92000
+event  number:  93000
+event  number:  94000
+event  number:  95000
+event  number:  96000
+event  number:  97000
+event  number:  98000
+event  number:  99000
+event  number:  100000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file3.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  101000
+event  number:  102000
+event  number:  103000
+event  number:  104000
+event  number:  105000
+event  number:  106000
+event  number:  107000
+event  number:  108000
+event  number:  109000
+event  number:  110000
+event  number:  111000
+event  number:  112000
+event  number:  113000
+event  number:  114000
+event  number:  115000
+event  number:  116000
+event  number:  117000
+event  number:  118000
+event  number:  119000
+event  number:  120000
+event  number:  121000
+event  number:  122000
+event  number:  123000
+event  number:  124000
+event  number:  125000
+event  number:  126000
+event  number:  127000
+event  number:  128000
+event  number:  129000
+event  number:  130000
+event  number:  131000
+event  number:  132000
+event  number:  133000
+event  number:  134000
+event  number:  135000
+event  number:  136000
+event  number:  137000
+event  number:  138000
+event  number:  139000
+event  number:  140000
+event  number:  141000
+event  number:  142000
+event  number:  143000
+event  number:  144000
+event  number:  145000
+event  number:  146000
+event  number:  147000
+event  number:  148000
+event  number:  149000
+event  number:  150000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file4.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  151000
+event  number:  152000
+event  number:  153000
+event  number:  154000
+event  number:  155000
+event  number:  156000
+event  number:  157000
+event  number:  158000
+event  number:  159000
+event  number:  160000
+event  number:  161000
+event  number:  162000
+event  number:  163000
+event  number:  164000
+event  number:  165000
+event  number:  166000
+event  number:  167000
+event  number:  168000
+event  number:  169000
+event  number:  170000
+event  number:  171000
+event  number:  172000
+event  number:  173000
+event  number:  174000
+event  number:  175000
+event  number:  176000
+event  number:  177000
+event  number:  178000
+event  number:  179000
+event  number:  180000
+event  number:  181000
+event  number:  182000
+event  number:  183000
+event  number:  184000
+event  number:  185000
+event  number:  186000
+event  number:  187000
+event  number:  188000
+event  number:  189000
+event  number:  190000
+event  number:  191000
+event  number:  192000
+event  number:  193000
+event  number:  194000
+event  number:  195000
+event  number:  196000
+event  number:  197000
+event  number:  198000
+event  number:  199000
+event  number:  200000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file5.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  201000
+event  number:  202000
+event  number:  203000
+event  number:  204000
+event  number:  205000
+event  number:  206000
+event  number:  207000
+event  number:  208000
+event  number:  209000
+event  number:  210000
+event  number:  211000
+event  number:  212000
+event  number:  213000
+event  number:  214000
+event  number:  215000
+event  number:  216000
+event  number:  217000
+event  number:  218000
+event  number:  219000
+event  number:  220000
+event  number:  221000
+event  number:  222000
+event  number:  223000
+event  number:  224000
+event  number:  225000
+event  number:  226000
+event  number:  227000
+event  number:  228000
+event  number:  229000
+event  number:  230000
+event  number:  231000
+event  number:  232000
+event  number:  233000
+event  number:  234000
+event  number:  235000
+event  number:  236000
+event  number:  237000
+event  number:  238000
+event  number:  239000
+event  number:  240000
+event  number:  241000
+event  number:  242000
+event  number:  243000
+event  number:  244000
+event  number:  245000
+event  number:  246000
+event  number:  247000
+event  number:  248000
+event  number:  249000
+event  number:  250000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file6.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  251000
+event  number:  252000
+event  number:  253000
+event  number:  254000
+event  number:  255000
+event  number:  256000
+event  number:  257000
+event  number:  258000
+event  number:  259000
+event  number:  260000
+event  number:  261000
+event  number:  262000
+event  number:  263000
+event  number:  264000
+event  number:  265000
+event  number:  266000
+event  number:  267000
+event  number:  268000
+event  number:  269000
+event  number:  270000
+event  number:  271000
+event  number:  272000
+event  number:  273000
+event  number:  274000
+event  number:  275000
+event  number:  276000
+event  number:  277000
+event  number:  278000
+event  number:  279000
+event  number:  280000
+event  number:  281000
+event  number:  282000
+event  number:  283000
+event  number:  284000
+event  number:  285000
+event  number:  286000
+event  number:  287000
+event  number:  288000
+event  number:  289000
+event  number:  290000
+event  number:  291000
+event  number:  292000
+event  number:  293000
+event  number:  294000
+event  number:  295000
+event  number:  296000
+event  number:  297000
+event  number:  298000
+event  number:  299000
+event  number:  300000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file7.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  301000
+event  number:  302000
+event  number:  303000
+event  number:  304000
+event  number:  305000
+event  number:  306000
+event  number:  307000
+event  number:  308000
+event  number:  309000
+event  number:  310000
+event  number:  311000
+event  number:  312000
+event  number:  313000
+event  number:  314000
+event  number:  315000
+event  number:  316000
+event  number:  317000
+event  number:  318000
+event  number:  319000
+event  number:  320000
+event  number:  321000
+event  number:  322000
+event  number:  323000
+event  number:  324000
+event  number:  325000
+event  number:  326000
+event  number:  327000
+event  number:  328000
+event  number:  329000
+event  number:  330000
+event  number:  331000
+event  number:  332000
+event  number:  333000
+event  number:  334000
+event  number:  335000
+event  number:  336000
+event  number:  337000
+event  number:  338000
+event  number:  339000
+event  number:  340000
+event  number:  341000
+event  number:  342000
+event  number:  343000
+event  number:  344000
+event  number:  345000
+event  number:  346000
+event  number:  347000
+event  number:  348000
+event  number:  349000
+event  number:  350000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27633_file8.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  351000
+event  number:  352000
+event  number:  353000
+event  number:  354000
+event  number:  355000
+event  number:  356000
+event  number:  357000
+event  number:  358000
+event  number:  359000
+event  number:  360000
+event  number:  361000
+event  number:  362000
+event  number:  363000
+event  number:  364000
+event  number:  365000
+event  number:  366000
+event  number:  367000
+event  number:  368000
+event  number:  369000
+event  number:  370000
+event  number:  371000
+event  number:  372000
+event  number:  373000
+event  number:  374000
+event  number:  375000
+event  number:  376000
+event  number:  377000
+event  number:  378000
+event  number:  379000
+event  number:  380000
+event  number:  381000
+event  number:  382000
+event  number:  383000
+event  number:  384000
+event  number:  385000
+event  number:  386000
+event  number:  387000
+event  number:  388000
+event  number:  389000
+event  number:  390000
+event  number:  391000
+event  number:  392000
+event  number:  393000
+event  number:  394000
+event  number:  395000
+event  number:  396000
+event  number:  397000
+event  number:  398000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file10.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  451000
+event  number:  452000
+event  number:  453000
+event  number:  454000
+event  number:  455000
+event  number:  456000
+event  number:  457000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file1.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  1000
+event  number:  2000
+event  number:  3000
+event  number:  4000
+event  number:  5000
+event  number:  6000
+event  number:  7000
+event  number:  8000
+event  number:  9000
+event  number:  10000
+event  number:  11000
+event  number:  12000
+event  number:  13000
+event  number:  14000
+event  number:  15000
+event  number:  16000
+event  number:  17000
+event  number:  18000
+event  number:  19000
+event  number:  20000
+event  number:  21000
+event  number:  22000
+event  number:  23000
+event  number:  24000
+event  number:  25000
+event  number:  26000
+event  number:  27000
+event  number:  28000
+event  number:  29000
+event  number:  30000
+event  number:  31000
+event  number:  32000
+event  number:  33000
+event  number:  34000
+event  number:  35000
+event  number:  36000
+event  number:  37000
+event  number:  38000
+event  number:  39000
+event  number:  40000
+event  number:  41000
+event  number:  42000
+event  number:  43000
+event  number:  44000
+event  number:  45000
+event  number:  46000
+event  number:  47000
+event  number:  48000
+event  number:  49000
+event  number:  50000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file2.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  51000
+event  number:  52000
+event  number:  53000
+event  number:  54000
+event  number:  55000
+event  number:  56000
+event  number:  57000
+event  number:  58000
+event  number:  59000
+event  number:  60000
+event  number:  61000
+event  number:  62000
+event  number:  63000
+event  number:  64000
+event  number:  65000
+event  number:  66000
+event  number:  67000
+event  number:  68000
+event  number:  69000
+event  number:  70000
+event  number:  71000
+event  number:  72000
+event  number:  73000
+event  number:  74000
+event  number:  75000
+event  number:  76000
+event  number:  77000
+event  number:  78000
+event  number:  79000
+event  number:  80000
+event  number:  81000
+event  number:  82000
+event  number:  83000
+event  number:  84000
+event  number:  85000
+event  number:  86000
+event  number:  87000
+event  number:  88000
+event  number:  89000
+event  number:  90000
+event  number:  91000
+event  number:  92000
+event  number:  93000
+event  number:  94000
+event  number:  95000
+event  number:  96000
+event  number:  97000
+event  number:  98000
+event  number:  99000
+event  number:  100000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file3.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  101000
+event  number:  102000
+event  number:  103000
+event  number:  104000
+event  number:  105000
+event  number:  106000
+event  number:  107000
+event  number:  108000
+event  number:  109000
+event  number:  110000
+event  number:  111000
+event  number:  112000
+event  number:  113000
+event  number:  114000
+event  number:  115000
+event  number:  116000
+event  number:  117000
+event  number:  118000
+event  number:  119000
+event  number:  120000
+event  number:  121000
+event  number:  122000
+event  number:  123000
+event  number:  124000
+event  number:  125000
+event  number:  126000
+event  number:  127000
+event  number:  128000
+event  number:  129000
+event  number:  130000
+event  number:  131000
+event  number:  132000
+event  number:  133000
+event  number:  134000
+event  number:  135000
+event  number:  136000
+event  number:  137000
+event  number:  138000
+event  number:  139000
+event  number:  140000
+event  number:  141000
+event  number:  142000
+event  number:  143000
+event  number:  144000
+event  number:  145000
+event  number:  146000
+event  number:  147000
+event  number:  148000
+event  number:  149000
+event  number:  150000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file4.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  151000
+event  number:  152000
+event  number:  153000
+event  number:  154000
+event  number:  155000
+event  number:  156000
+event  number:  157000
+event  number:  158000
+event  number:  159000
+event  number:  160000
+event  number:  161000
+event  number:  162000
+event  number:  163000
+event  number:  164000
+event  number:  165000
+event  number:  166000
+event  number:  167000
+event  number:  168000
+event  number:  169000
+event  number:  170000
+event  number:  171000
+event  number:  172000
+event  number:  173000
+event  number:  174000
+event  number:  175000
+event  number:  176000
+event  number:  177000
+event  number:  178000
+event  number:  179000
+event  number:  180000
+event  number:  181000
+event  number:  182000
+event  number:  183000
+event  number:  184000
+event  number:  185000
+event  number:  186000
+event  number:  187000
+event  number:  188000
+event  number:  189000
+event  number:  190000
+event  number:  191000
+event  number:  192000
+event  number:  193000
+event  number:  194000
+event  number:  195000
+event  number:  196000
+event  number:  197000
+event  number:  198000
+event  number:  199000
+event  number:  200000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file5.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  201000
+event  number:  202000
+event  number:  203000
+event  number:  204000
+event  number:  205000
+event  number:  206000
+event  number:  207000
+event  number:  208000
+event  number:  209000
+event  number:  210000
+event  number:  211000
+event  number:  212000
+event  number:  213000
+event  number:  214000
+event  number:  215000
+event  number:  216000
+event  number:  217000
+event  number:  218000
+event  number:  219000
+event  number:  220000
+event  number:  221000
+event  number:  222000
+event  number:  223000
+event  number:  224000
+event  number:  225000
+event  number:  226000
+event  number:  227000
+event  number:  228000
+event  number:  229000
+event  number:  230000
+event  number:  231000
+event  number:  232000
+event  number:  233000
+event  number:  234000
+event  number:  235000
+event  number:  236000
+event  number:  237000
+event  number:  238000
+event  number:  239000
+event  number:  240000
+event  number:  241000
+event  number:  242000
+event  number:  243000
+event  number:  244000
+event  number:  245000
+event  number:  246000
+event  number:  247000
+event  number:  248000
+event  number:  249000
+event  number:  250000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file6.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  251000
+event  number:  252000
+event  number:  253000
+event  number:  254000
+event  number:  255000
+event  number:  256000
+event  number:  257000
+event  number:  258000
+event  number:  259000
+event  number:  260000
+event  number:  261000
+event  number:  262000
+event  number:  263000
+event  number:  264000
+event  number:  265000
+event  number:  266000
+event  number:  267000
+event  number:  268000
+event  number:  269000
+event  number:  270000
+event  number:  271000
+event  number:  272000
+event  number:  273000
+event  number:  274000
+event  number:  275000
+event  number:  276000
+event  number:  277000
+event  number:  278000
+event  number:  279000
+event  number:  280000
+event  number:  281000
+event  number:  282000
+event  number:  283000
+event  number:  284000
+event  number:  285000
+event  number:  286000
+event  number:  287000
+event  number:  288000
+event  number:  289000
+event  number:  290000
+event  number:  291000
+event  number:  292000
+event  number:  293000
+event  number:  294000
+event  number:  295000
+event  number:  296000
+event  number:  297000
+event  number:  298000
+event  number:  299000
+event  number:  300000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file7.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  301000
+event  number:  302000
+event  number:  303000
+event  number:  304000
+event  number:  305000
+event  number:  306000
+event  number:  307000
+event  number:  308000
+event  number:  309000
+event  number:  310000
+event  number:  311000
+event  number:  312000
+event  number:  313000
+event  number:  314000
+event  number:  315000
+event  number:  316000
+event  number:  317000
+event  number:  318000
+event  number:  319000
+event  number:  320000
+event  number:  321000
+event  number:  322000
+event  number:  323000
+event  number:  324000
+event  number:  325000
+event  number:  326000
+event  number:  327000
+event  number:  328000
+event  number:  329000
+event  number:  330000
+event  number:  331000
+event  number:  332000
+event  number:  333000
+event  number:  334000
+event  number:  335000
+event  number:  336000
+event  number:  337000
+event  number:  338000
+event  number:  339000
+event  number:  340000
+event  number:  341000
+event  number:  342000
+event  number:  343000
+event  number:  344000
+event  number:  345000
+event  number:  346000
+event  number:  347000
+event  number:  348000
+event  number:  349000
+event  number:  350000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file8.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  351000
+event  number:  352000
+event  number:  353000
+event  number:  354000
+event  number:  355000
+event  number:  356000
+event  number:  357000
+event  number:  358000
+event  number:  359000
+event  number:  360000
+event  number:  361000
+event  number:  362000
+event  number:  363000
+event  number:  364000
+event  number:  365000
+event  number:  366000
+event  number:  367000
+event  number:  368000
+event  number:  369000
+event  number:  370000
+event  number:  371000
+event  number:  372000
+event  number:  373000
+event  number:  374000
+event  number:  375000
+event  number:  376000
+event  number:  377000
+event  number:  378000
+event  number:  379000
+event  number:  380000
+event  number:  381000
+event  number:  382000
+event  number:  383000
+event  number:  384000
+event  number:  385000
+event  number:  386000
+event  number:  387000
+event  number:  388000
+event  number:  389000
+event  number:  390000
+event  number:  391000
+event  number:  392000
+event  number:  393000
+event  number:  394000
+event  number:  395000
+event  number:  396000
+event  number:  397000
+event  number:  398000
+event  number:  399000
+event  number:  400000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27635_file9.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  401000
+event  number:  402000
+event  number:  403000
+event  number:  404000
+event  number:  405000
+event  number:  406000
+event  number:  407000
+event  number:  408000
+event  number:  409000
+event  number:  410000
+event  number:  411000
+event  number:  412000
+event  number:  413000
+event  number:  414000
+event  number:  415000
+event  number:  416000
+event  number:  417000
+event  number:  418000
+event  number:  419000
+event  number:  420000
+event  number:  421000
+event  number:  422000
+event  number:  423000
+event  number:  424000
+event  number:  425000
+event  number:  426000
+event  number:  427000
+event  number:  428000
+event  number:  429000
+event  number:  430000
+event  number:  431000
+event  number:  432000
+event  number:  433000
+event  number:  434000
+event  number:  435000
+event  number:  436000
+event  number:  437000
+event  number:  438000
+event  number:  439000
+event  number:  440000
+event  number:  441000
+event  number:  442000
+event  number:  443000
+event  number:  444000
+event  number:  445000
+event  number:  446000
+event  number:  447000
+event  number:  448000
+event  number:  449000
+event  number:  450000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file1.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  1000
+event  number:  2000
+event  number:  3000
+event  number:  4000
+event  number:  5000
+event  number:  6000
+event  number:  7000
+event  number:  8000
+event  number:  9000
+event  number:  10000
+event  number:  11000
+event  number:  12000
+event  number:  13000
+event  number:  14000
+event  number:  15000
+event  number:  16000
+event  number:  17000
+event  number:  18000
+event  number:  19000
+event  number:  20000
+event  number:  21000
+event  number:  22000
+event  number:  23000
+event  number:  24000
+event  number:  25000
+event  number:  26000
+event  number:  27000
+event  number:  28000
+event  number:  29000
+event  number:  30000
+event  number:  31000
+event  number:  32000
+event  number:  33000
+event  number:  34000
+event  number:  35000
+event  number:  36000
+event  number:  37000
+event  number:  38000
+event  number:  39000
+event  number:  40000
+event  number:  41000
+event  number:  42000
+event  number:  43000
+event  number:  44000
+event  number:  45000
+event  number:  46000
+event  number:  47000
+event  number:  48000
+event  number:  49000
+event  number:  50000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file2.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  51000
+event  number:  52000
+event  number:  53000
+event  number:  54000
+event  number:  55000
+event  number:  56000
+event  number:  57000
+event  number:  58000
+event  number:  59000
+event  number:  60000
+event  number:  61000
+event  number:  62000
+event  number:  63000
+event  number:  64000
+event  number:  65000
+event  number:  66000
+event  number:  67000
+event  number:  68000
+event  number:  69000
+event  number:  70000
+event  number:  71000
+event  number:  72000
+event  number:  73000
+event  number:  74000
+event  number:  75000
+event  number:  76000
+event  number:  77000
+event  number:  78000
+event  number:  79000
+event  number:  80000
+event  number:  81000
+event  number:  82000
+event  number:  83000
+event  number:  84000
+event  number:  85000
+event  number:  86000
+event  number:  87000
+event  number:  88000
+event  number:  89000
+event  number:  90000
+event  number:  91000
+event  number:  92000
+event  number:  93000
+event  number:  94000
+event  number:  95000
+event  number:  96000
+event  number:  97000
+event  number:  98000
+event  number:  99000
+event  number:  100000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file3.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  101000
+event  number:  102000
+event  number:  103000
+event  number:  104000
+event  number:  105000
+event  number:  106000
+event  number:  107000
+event  number:  108000
+event  number:  109000
+event  number:  110000
+event  number:  111000
+event  number:  112000
+event  number:  113000
+event  number:  114000
+event  number:  115000
+event  number:  116000
+event  number:  117000
+event  number:  118000
+event  number:  119000
+event  number:  120000
+event  number:  121000
+event  number:  122000
+event  number:  123000
+event  number:  124000
+event  number:  125000
+event  number:  126000
+event  number:  127000
+event  number:  128000
+event  number:  129000
+event  number:  130000
+event  number:  131000
+event  number:  132000
+event  number:  133000
+event  number:  134000
+event  number:  135000
+event  number:  136000
+event  number:  137000
+event  number:  138000
+event  number:  139000
+event  number:  140000
+event  number:  141000
+event  number:  142000
+event  number:  143000
+event  number:  144000
+event  number:  145000
+event  number:  146000
+event  number:  147000
+event  number:  148000
+event  number:  149000
+event  number:  150000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27636_file4.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  151000
+event  number:  152000
+event  number:  153000
+event  number:  154000
+event  number:  155000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file1.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  1000
+event  number:  2000
+event  number:  3000
+event  number:  4000
+event  number:  5000
+event  number:  6000
+event  number:  7000
+event  number:  8000
+event  number:  9000
+event  number:  10000
+event  number:  11000
+event  number:  12000
+event  number:  13000
+event  number:  14000
+event  number:  15000
+event  number:  16000
+event  number:  17000
+event  number:  18000
+event  number:  19000
+event  number:  20000
+event  number:  21000
+event  number:  22000
+event  number:  23000
+event  number:  24000
+event  number:  25000
+event  number:  26000
+event  number:  27000
+event  number:  28000
+event  number:  29000
+event  number:  30000
+event  number:  31000
+event  number:  32000
+event  number:  33000
+event  number:  34000
+event  number:  35000
+event  number:  36000
+event  number:  37000
+event  number:  38000
+event  number:  39000
+event  number:  40000
+event  number:  41000
+event  number:  42000
+event  number:  43000
+event  number:  44000
+event  number:  45000
+event  number:  46000
+event  number:  47000
+event  number:  48000
+event  number:  49000
+event  number:  50000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file2.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  51000
+event  number:  52000
+event  number:  53000
+event  number:  54000
+event  number:  55000
+event  number:  56000
+event  number:  57000
+event  number:  58000
+event  number:  59000
+event  number:  60000
+event  number:  61000
+event  number:  62000
+event  number:  63000
+event  number:  64000
+event  number:  65000
+event  number:  66000
+event  number:  67000
+event  number:  68000
+event  number:  69000
+event  number:  70000
+event  number:  71000
+event  number:  72000
+event  number:  73000
+event  number:  74000
+event  number:  75000
+event  number:  76000
+event  number:  77000
+event  number:  78000
+event  number:  79000
+event  number:  80000
+event  number:  81000
+event  number:  82000
+event  number:  83000
+event  number:  84000
+event  number:  85000
+event  number:  86000
+event  number:  87000
+event  number:  88000
+event  number:  89000
+event  number:  90000
+event  number:  91000
+event  number:  92000
+event  number:  93000
+event  number:  94000
+event  number:  95000
+event  number:  96000
+event  number:  97000
+event  number:  98000
+event  number:  99000
+event  number:  100000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file3.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  101000
+event  number:  102000
+event  number:  103000
+event  number:  104000
+event  number:  105000
+event  number:  106000
+event  number:  107000
+event  number:  108000
+event  number:  109000
+event  number:  110000
+event  number:  111000
+event  number:  112000
+event  number:  113000
+event  number:  114000
+event  number:  115000
+event  number:  116000
+event  number:  117000
+event  number:  118000
+event  number:  119000
+event  number:  120000
+event  number:  121000
+event  number:  122000
+event  number:  123000
+event  number:  124000
+event  number:  125000
+event  number:  126000
+event  number:  127000
+event  number:  128000
+event  number:  129000
+event  number:  130000
+event  number:  131000
+event  number:  132000
+event  number:  133000
+event  number:  134000
+event  number:  135000
+event  number:  136000
+event  number:  137000
+event  number:  138000
+event  number:  139000
+event  number:  140000
+event  number:  141000
+event  number:  142000
+event  number:  143000
+event  number:  144000
+event  number:  145000
+event  number:  146000
+event  number:  147000
+event  number:  148000
+event  number:  149000
+event  number:  150000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file4.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  151000
+event  number:  152000
+event  number:  153000
+event  number:  154000
+event  number:  155000
+event  number:  156000
+event  number:  157000
+event  number:  158000
+event  number:  159000
+event  number:  160000
+event  number:  161000
+event  number:  162000
+event  number:  163000
+event  number:  164000
+event  number:  165000
+event  number:  166000
+event  number:  167000
+event  number:  168000
+event  number:  169000
+event  number:  170000
+event  number:  171000
+event  number:  172000
+event  number:  173000
+event  number:  174000
+event  number:  175000
+event  number:  176000
+event  number:  177000
+event  number:  178000
+event  number:  179000
+event  number:  180000
+event  number:  181000
+event  number:  182000
+event  number:  183000
+event  number:  184000
+event  number:  185000
+event  number:  186000
+event  number:  187000
+event  number:  188000
+event  number:  189000
+event  number:  190000
+event  number:  191000
+event  number:  192000
+event  number:  193000
+event  number:  194000
+event  number:  195000
+event  number:  196000
+event  number:  197000
+event  number:  198000
+event  number:  199000
+event  number:  200000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file5.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  201000
+event  number:  202000
+event  number:  203000
+event  number:  204000
+event  number:  205000
+event  number:  206000
+event  number:  207000
+event  number:  208000
+event  number:  209000
+event  number:  210000
+event  number:  211000
+event  number:  212000
+event  number:  213000
+event  number:  214000
+event  number:  215000
+event  number:  216000
+event  number:  217000
+event  number:  218000
+event  number:  219000
+event  number:  220000
+event  number:  221000
+event  number:  222000
+event  number:  223000
+event  number:  224000
+event  number:  225000
+event  number:  226000
+event  number:  227000
+event  number:  228000
+event  number:  229000
+event  number:  230000
+event  number:  231000
+event  number:  232000
+event  number:  233000
+event  number:  234000
+event  number:  235000
+event  number:  236000
+event  number:  237000
+event  number:  238000
+event  number:  239000
+event  number:  240000
+event  number:  241000
+event  number:  242000
+event  number:  243000
+event  number:  244000
+event  number:  245000
+event  number:  246000
+event  number:  247000
+event  number:  248000
+event  number:  249000
+event  number:  250000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file6.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  251000
+event  number:  252000
+event  number:  253000
+event  number:  254000
+event  number:  255000
+event  number:  256000
+event  number:  257000
+event  number:  258000
+event  number:  259000
+event  number:  260000
+event  number:  261000
+event  number:  262000
+event  number:  263000
+event  number:  264000
+event  number:  265000
+event  number:  266000
+event  number:  267000
+event  number:  268000
+event  number:  269000
+event  number:  270000
+event  number:  271000
+event  number:  272000
+event  number:  273000
+event  number:  274000
+event  number:  275000
+event  number:  276000
+event  number:  277000
+event  number:  278000
+event  number:  279000
+event  number:  280000
+event  number:  281000
+event  number:  282000
+event  number:  283000
+event  number:  284000
+event  number:  285000
+event  number:  286000
+event  number:  287000
+event  number:  288000
+event  number:  289000
+event  number:  290000
+event  number:  291000
+event  number:  292000
+event  number:  293000
+event  number:  294000
+event  number:  295000
+event  number:  296000
+event  number:  297000
+event  number:  298000
+event  number:  299000
+event  number:  300000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file7.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  301000
+event  number:  302000
+event  number:  303000
+event  number:  304000
+event  number:  305000
+event  number:  306000
+event  number:  307000
+event  number:  308000
+event  number:  309000
+event  number:  310000
+event  number:  311000
+event  number:  312000
+event  number:  313000
+event  number:  314000
+event  number:  315000
+event  number:  316000
+event  number:  317000
+event  number:  318000
+event  number:  319000
+event  number:  320000
+event  number:  321000
+event  number:  322000
+event  number:  323000
+event  number:  324000
+event  number:  325000
+event  number:  326000
+event  number:  327000
+event  number:  328000
+event  number:  329000
+event  number:  330000
+event  number:  331000
+event  number:  332000
+event  number:  333000
+event  number:  334000
+event  number:  335000
+event  number:  336000
+event  number:  337000
+event  number:  338000
+event  number:  339000
+event  number:  340000
+event  number:  341000
+event  number:  342000
+event  number:  343000
+event  number:  344000
+event  number:  345000
+event  number:  346000
+event  number:  347000
+event  number:  348000
+event  number:  349000
+event  number:  350000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file8.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  351000
+event  number:  352000
+event  number:  353000
+event  number:  354000
+event  number:  355000
+event  number:  356000
+event  number:  357000
+event  number:  358000
+event  number:  359000
+event  number:  360000
+event  number:  361000
+event  number:  362000
+event  number:  363000
+event  number:  364000
+event  number:  365000
+event  number:  366000
+event  number:  367000
+event  number:  368000
+event  number:  369000
+event  number:  370000
+event  number:  371000
+event  number:  372000
+event  number:  373000
+event  number:  374000
+event  number:  375000
+event  number:  376000
+event  number:  377000
+event  number:  378000
+event  number:  379000
+event  number:  380000
+event  number:  381000
+event  number:  382000
+event  number:  383000
+event  number:  384000
+event  number:  385000
+event  number:  386000
+event  number:  387000
+event  number:  388000
+event  number:  389000
+event  number:  390000
+event  number:  391000
+event  number:  392000
+event  number:  393000
+event  number:  394000
+event  number:  395000
+event  number:  396000
+event  number:  397000
+event  number:  398000
+event  number:  399000
+event  number:  400000
+
+**************************************************
+Print JobInfo for data file: /besfs2/offline/data/664-1/jpsi/12mc/dst/jpsi2012_stream001_run27637_file9.dst
+          BOSS version: 6.6.4
+**************************************************
+
+event  number:  401000
+event  number:  402000
+event  number:  403000
+event  number:  404000
+event  number:  405000
+event  number:  406000
+event  number:  407000
+event  number:  408000
+event  number:  409000
+event  number:  410000
+event  number:  411000
+event  number:  412000
+event  number:  413000
+event  number:  414000
+event  number:  415000
+event  number:  416000
+event  number:  417000
+event  number:  418000
+event  number:  419000
+event  number:  420000
+event  number:  421000
+event  number:  422000
+event  number:  423000
+event  number:  424000
+ApplicationMgr       INFO Application Manager Stopped successfully
+total number:              2307101
+nGood==4, nCharge==0:      535181
+Photon Selection :         509277
+Pass Pid:                  9638
+e+e- vertex fit:           9455
+4C Kinematic fit           499
+Good photon selection      490
+ApplicationMgr       INFO Application Manager Finalized successfully
+ApplicationMgr       INFO Application Manager Terminated successfully
+2924.648u 166.347s 1:39:05.36 51.9%	0+0k 20704+4496io 30pf+0w

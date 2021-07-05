@@ -1,0 +1,26 @@
+package StoeeLAlg
+
+author Xin-Xin MA <maxx@ihep.ac.cn>
+author Hao-Kai SUN <sunhk@ihep.ac.cn>
+
+use BesPolicy           BesPolicy-*
+
+use GaudiInterface      GaudiInterface-*     External
+
+use McTruth             McTruth-*            Event
+use EventModel          EventModel-*         Event
+use EvtRecEvent         EvtRecEvent-*        Event
+use ParticleID          ParticleID-*         Analysis
+use VertexFit           VertexFit-*          Analysis
+
+use DataBaseReader      DataBaseReader-*
+use McDecayModeSvc      McDecayModeSvc-*
+use GammaConv           GammaConv-*
+use MCTruthMatchSvc     MCTruthMatchSvc-*
+use HadronInfo          HadronInfo-*
+
+use BesDChain           BesDChain-*          Event
+
+
+apply_pattern component_library
+library StoeeLAlg *.cxx components/*.cxx util/*.cxx  Selector/*.cxx

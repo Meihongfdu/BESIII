@@ -1,0 +1,550 @@
+#include "DDmcmode/DDmcmode.h"
+
+DDmcmode* DDmcmode::m_pointer = 0;
+
+DDmcmode* DDmcmode::instance() {
+  if(!m_pointer) m_pointer = new DDmcmode();
+  return m_pointer;
+}
+
+void DDmcmode::D0mcmode(SmartDataPtr<Event::McParticleCol> mcParticleCol){
+
+  bool SelectionValid = false;
+  MctkPID.clear();
+
+    Mcmode.clear();
+     Ptkmc.clear();
+
+  if(mcParticleCol){
+    Event::McParticleCol::iterator iter_mc = mcParticleCol->begin();
+    bool MotherParticleDecay(false);
+    int rootIndex(-1);
+    for (; iter_mc != mcParticleCol->end(); iter_mc++){
+      if ((*iter_mc)->primaryParticle())                                   continue;
+      if (!(*iter_mc)->decayFromGenerator())                               continue;
+
+      int pdgid = (*iter_mc)->particleProperty();
+      int mcidx = ((*iter_mc)->mother()).trackIndex() - rootIndex;
+
+      if(pdgid==-22)                                                       continue;
+      if(pdgid==22&&(((*iter_mc)->mother()).particleProperty()==111))      continue;
+      if(pdgid==22&&(((*iter_mc)->mother()).particleProperty()==221))      continue;
+      if(abs(pdgid)==11&&(((*iter_mc)->mother()).particleProperty()==111)) continue;
+
+      int motherparticlepdg = 421;
+
+      if(pdgid==motherparticlepdg){
+        MotherParticleDecay = true;
+        rootIndex = (*iter_mc)->trackIndex();
+      }
+      if (!MotherParticleDecay)                                            continue;
+      bool DDecayValid = false;
+
+      if( 
+          (((*iter_mc)->mother()).particleProperty()==motherparticlepdg ) ||
+          ((((*iter_mc)->mother()).mother()).particleProperty()==motherparticlepdg) ||
+          (((((*iter_mc)->mother()).mother()).mother()).particleProperty()==motherparticlepdg) || 
+          ((((((*iter_mc)->mother()).mother()).mother()).mother()).particleProperty()==motherparticlepdg) || 
+          (((((((*iter_mc)->mother()).mother()).mother()).mother()).mother()).particleProperty()==motherparticlepdg)
+        ) { DDecayValid = true;  }
+
+      if(!DDecayValid)                                                     continue;
+
+// Save the information of the intemediate particles directly from the parent particle D0
+      bool MctkP                      =  false;
+
+      if((((*iter_mc)->mother()).particleProperty())!=421) continue;
+      if(pdgid==22)             MctkP = true;
+      if(fabs(pdgid)==11)       MctkP = true;
+      if(fabs(pdgid)==12)       MctkP = true;
+      if(fabs(pdgid)==13)       MctkP = true;
+      if(fabs(pdgid)==14)       MctkP = true;
+      if(fabs(pdgid)==15)       MctkP = true;
+      if(fabs(pdgid)==16)       MctkP = true;
+      if(pdgid==111)            MctkP = true;
+      if(pdgid==113)            MctkP = true;
+      if(pdgid==30113)          MctkP = true;
+      if(pdgid==221)            MctkP = true;
+      if(pdgid==331)            MctkP = true;
+      if(pdgid==310)            MctkP = true;
+      if(pdgid==130)            MctkP = true;
+      if(fabs(pdgid)==211)      MctkP = true;
+      if(fabs(pdgid)==213)      MctkP = true;
+      if(fabs(pdgid)==30213)    MctkP = true;
+      if(fabs(pdgid)==223)      MctkP = true;
+      if(fabs(pdgid)==321)      MctkP = true;
+      if(fabs(pdgid)==311)      MctkP = true;
+      if(fabs(pdgid)==313)      MctkP = true;
+      if(fabs(pdgid)==315)      MctkP = true;
+      if(fabs(pdgid)==323)      MctkP = true;
+      if(fabs(pdgid)==325)      MctkP = true;
+      if(fabs(pdgid)==333)      MctkP = true;
+      if(pdgid==10111)          MctkP = true;
+      if(fabs(pdgid)==10211)    MctkP = true;
+      if(fabs(pdgid)==10213)    MctkP = true;
+      if(fabs(pdgid)==10311)    MctkP = true;
+      if(fabs(pdgid)==10313)    MctkP = true;
+      if(fabs(pdgid)==10323)    MctkP = true;
+      if(fabs(pdgid)==20323)    MctkP = true;
+      if(pdgid==10221)          MctkP = true;
+      if(pdgid==50221)          MctkP = true;
+      if(pdgid==90100221)       MctkP = true;
+      if(pdgid==20213)          MctkP = true;
+
+      int Idtrk = pdgid;
+      MctkPID.push_back(Idtrk);
+      }
+
+      int Nint = MctkPID.size();
+//      cout<<"MctkPID = "<<Nint<<endl;
+
+// Judging the D0 modes by the intemediate particles directly from the parent particle D0
+
+    sort(MctkPID.begin(),MctkPID.end(),greater<int>());
+
+/*
+if(Nint==2) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<endl;
+if(Nint==3) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<endl;
+if(Nint==4) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<","<<MctkPID[3]<<endl;
+if(Nint==5) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<","<<MctkPID[3]<<","<<MctkPID[4]<<endl;
+if(Nint==6) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<","<<MctkPID[3]<<","<<MctkPID[4]<<","<<MctkPID[5]<<endl;
+*/
+
+ if(Nint==2) {
+  if(MctkPID[0]==    211&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(117);}
+  if(MctkPID[0]==    310&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(118);}
+  if(MctkPID[0]==    130&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(119);}
+  if(MctkPID[0]==    221&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(120);}
+  if(MctkPID[0]==    331&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(121);}
+  if(MctkPID[0]==    223&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(122);}
+  if(MctkPID[0]==    221&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(123);}
+  if(MctkPID[0]==    331&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(124);}
+  if(MctkPID[0]==  20213&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(125);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  -323) { SelectionValid = true; Mcmode.push_back(126);}
+  if(MctkPID[0]==    113&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(127);}
+  if(MctkPID[0]==    223&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(128);}
+  if(MctkPID[0]==    111&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(130);}
+  if(MctkPID[0]==    211&&MctkPID[1]==-10323) { SelectionValid = true; Mcmode.push_back(131);}
+  if(MctkPID[0]==    111&&MctkPID[1]==-10313) { SelectionValid = true; Mcmode.push_back(132);}
+  if(MctkPID[0]==  10111&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(154);}
+  if(MctkPID[0]==  10211&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(155);}
+  if(MctkPID[0]==    333&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(161);}
+  if(MctkPID[0]==    333&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(162);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   313) { SelectionValid = true; Mcmode.push_back(172);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(173);}
+  if(MctkPID[0]==    310&&MctkPID[1]==   310) { SelectionValid = true; Mcmode.push_back(174);}
+  if(MctkPID[0]==    130&&MctkPID[1]==   130) { SelectionValid = true; Mcmode.push_back(175);}
+  if(MctkPID[0]==    313&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(176);}
+  if(MctkPID[0]==    311&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(177);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  -323) { SelectionValid = true; Mcmode.push_back(178);}
+  if(MctkPID[0]==    323&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(179);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(181);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   113) { SelectionValid = true; Mcmode.push_back(183);}
+  if(MctkPID[0]==  10323&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(193);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-10323) { SelectionValid = true; Mcmode.push_back(194);}
+  if(MctkPID[0]==  20323&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(195);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-20323) { SelectionValid = true; Mcmode.push_back(196);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(198);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(199);}
+  if(MctkPID[0]==    111&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(200);}
+  if(MctkPID[0]==    221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(201);}
+  if(MctkPID[0]==    331&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(202);}
+  if(MctkPID[0]==    221&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(204);}
+  if(MctkPID[0]==    331&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(205);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(206);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  -213) { SelectionValid = true; Mcmode.push_back(207);}
+  if(MctkPID[0]==    113&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(208);}
+  if(MctkPID[0]==    113&&MctkPID[1]==   113) { SelectionValid = true; Mcmode.push_back(211);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  -213) { SelectionValid = true; Mcmode.push_back(214);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(223);}
+  if(MctkPID[0]==    333&&MctkPID[1]==    22) { SelectionValid = true; Mcmode.push_back(226);}
+  if(MctkPID[0]==     22&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(227);}
+  if(MctkPID[0]==  10221&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(229);}
+  if(MctkPID[0]==9010221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(230);}
+  if(MctkPID[0]==  30213&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(233);}
+  if(MctkPID[0]==  30113&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(234);}
+  if(MctkPID[0]==    213&&MctkPID[1]==-30213) { SelectionValid = true; Mcmode.push_back(235);}
+  if(MctkPID[0]==  10221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(236);}
+  if(MctkPID[0]==  50221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(237);}
+  if(MctkPID[0]==    225&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(238);}
+  if(MctkPID[0]==  20213&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(239);}
+  if(MctkPID[0]==    313&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(241);}
+ }
+
+ if(Nint==3) {
+  if(MctkPID[0]==     12&&MctkPID[1]== -11&&MctkPID[2]==  -323) { SelectionValid = true; Mcmode.push_back(101);}
+  if(MctkPID[0]==     12&&MctkPID[1]== -11&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(102);}
+  if(MctkPID[0]==     12&&MctkPID[1]== -11&&MctkPID[2]==-10323) { SelectionValid = true; Mcmode.push_back(103);}
+  if(MctkPID[0]==     12&&MctkPID[1]== -11&&MctkPID[2]==  -325) { SelectionValid = true; Mcmode.push_back(104);}
+  if(MctkPID[0]==     12&&MctkPID[1]== -11&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(107);}
+  if(MctkPID[0]==     12&&MctkPID[1]== -11&&MctkPID[2]==  -213) { SelectionValid = true; Mcmode.push_back(108);}
+  if(MctkPID[0]==     14&&MctkPID[1]== -13&&MctkPID[2]==  -323) { SelectionValid = true; Mcmode.push_back(109);}
+  if(MctkPID[0]==     14&&MctkPID[1]== -13&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(110);}
+  if(MctkPID[0]==     14&&MctkPID[1]== -13&&MctkPID[2]==-10323) { SelectionValid = true; Mcmode.push_back(111);}
+  if(MctkPID[0]==     14&&MctkPID[1]== -13&&MctkPID[2]==  -325) { SelectionValid = true; Mcmode.push_back(112);}
+  if(MctkPID[0]==     14&&MctkPID[1]== -13&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(115);}
+  if(MctkPID[0]==     14&&MctkPID[1]== -13&&MctkPID[2]==  -213) { SelectionValid = true; Mcmode.push_back(116);}
+  if(MctkPID[0]==    211&&MctkPID[1]== 111&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(129);}
+  if(MctkPID[0]==    211&&MctkPID[1]==-211&&MctkPID[2]==  -311) { SelectionValid = true; Mcmode.push_back(133);}
+  if(MctkPID[0]==    111&&MctkPID[1]== 111&&MctkPID[2]==  -311) { SelectionValid = true; Mcmode.push_back(134);}
+  if(MctkPID[0]==    211&&MctkPID[1]==-211&&MctkPID[2]==  -313) { SelectionValid = true; Mcmode.push_back(135);}
+  if(MctkPID[0]==    111&&MctkPID[1]== 111&&MctkPID[2]==  -313) { SelectionValid = true; Mcmode.push_back(136);}
+  if(MctkPID[0]==    211&&MctkPID[1]== 111&&MctkPID[2]==  -323) { SelectionValid = true; Mcmode.push_back(137);}
+  if(MctkPID[0]==    213&&MctkPID[1]== 111&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(138);}
+  if(MctkPID[0]==    211&&MctkPID[1]== 113&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(139);}
+  if(MctkPID[0]==    223&&MctkPID[1]== 211&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(140);}
+  if(MctkPID[0]==    221&&MctkPID[1]== 211&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(141);}
+  if(MctkPID[0]==    331&&MctkPID[1]== 211&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(142);}
+  if(MctkPID[0]==    221&&MctkPID[1]== 111&&MctkPID[2]==  -311) { SelectionValid = true; Mcmode.push_back(143);}
+  if(MctkPID[0]==    211&&MctkPID[1]== 113&&MctkPID[2]==  -323) { SelectionValid = true; Mcmode.push_back(157);}
+  if(MctkPID[0]==    333&&MctkPID[1]== 211&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(150);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-311&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(163);}
+  if(MctkPID[0]==    310&&MctkPID[1]== 310&&MctkPID[2]==   310) { SelectionValid = true; Mcmode.push_back(164);}
+  if(MctkPID[0]==    130&&MctkPID[1]== 130&&MctkPID[2]==   130) { SelectionValid = true; Mcmode.push_back(165);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-313&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(170);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 111&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(180);}
+  if(MctkPID[0]==    333&&MctkPID[1]== 211&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(182);}
+  if(MctkPID[0]==    311&&MctkPID[1]== 211&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(187);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-211&&MctkPID[2]==  -311) { SelectionValid = true; Mcmode.push_back(188);}
+  if(MctkPID[0]==    313&&MctkPID[1]== 211&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(191);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-211&&MctkPID[2]==  -313) { SelectionValid = true; Mcmode.push_back(192);}
+  if(MctkPID[0]==9010221&&MctkPID[1]== 111&&MctkPID[2]==   111) { SelectionValid = true; Mcmode.push_back(209);}
+  if(MctkPID[0]==    111&&MctkPID[1]== 111&&MctkPID[2]==   111) { SelectionValid = true; Mcmode.push_back(210);}
+  if(MctkPID[0]==    223&&MctkPID[1]== 211&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(216);}
+  if(MctkPID[0]==    113&&MctkPID[1]== 113&&MctkPID[2]==   111) { SelectionValid = true; Mcmode.push_back(218);}
+  if(MctkPID[0]==    221&&MctkPID[1]== 211&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(221);}
+  if(MctkPID[0]==    331&&MctkPID[1]== 221&&MctkPID[2]==  -221) { SelectionValid = true; Mcmode.push_back(222);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 111&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(224);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 113&&MctkPID[2]==  -321) { SelectionValid = true; Mcmode.push_back(231);}
+  if(MctkPID[0]==9010221&&MctkPID[1]== 211&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(232);}
+  if(MctkPID[0]==    225&&MctkPID[1]== 211&&MctkPID[2]==  -211) { SelectionValid = true; Mcmode.push_back(240);}
+ }
+
+ if(Nint==4) {
+  if(MctkPID[0]==111&&MctkPID[1]== 12&&MctkPID[2]== -11&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(105);}
+  if(MctkPID[0]== 12&&MctkPID[1]==-11&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(106);}
+  if(MctkPID[0]==111&&MctkPID[1]== 14&&MctkPID[2]== -13&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(113);}
+  if(MctkPID[0]== 14&&MctkPID[1]==-13&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(114);}
+  if(MctkPID[0]==221&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(144);}
+  if(MctkPID[0]==221&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(145);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(146);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(147);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(148);}
+  if(MctkPID[0]==111&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(149);}
+  if(MctkPID[0]==211&&MctkPID[1]==113&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(156);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-323) { SelectionValid = true; Mcmode.push_back(158);}
+  if(MctkPID[0]==321&&MctkPID[1]==130&&MctkPID[2]== 130&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(166);}
+  if(MctkPID[0]==211&&MctkPID[1]==130&&MctkPID[2]== 130&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(167);}
+  if(MctkPID[0]==310&&MctkPID[1]==310&&MctkPID[2]== 211&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(168);}
+  if(MctkPID[0]==321&&MctkPID[1]==310&&MctkPID[2]== 310&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(169);}
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==-321&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(171);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(184);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(185);}
+  if(MctkPID[0]==311&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(186);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(189);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]== 111&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(190);}
+  if(MctkPID[0]==221&&MctkPID[1]==211&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(203);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(212);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(215);}
+  if(MctkPID[0]==211&&MctkPID[1]==113&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(217);}
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(225);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==-211&&MctkPID[3]==-313) { SelectionValid = true; Mcmode.push_back(228);}
+  }
+
+ if(Nint==5) {
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]==-211&&MctkPID[4]==-321) { SelectionValid = true; Mcmode.push_back(150);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-321) { SelectionValid = true; Mcmode.push_back(151);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==111&&MctkPID[3]==-211&&MctkPID[4]==-311) { SelectionValid = true; Mcmode.push_back(152);}
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]==-211&&MctkPID[4]==-321) { SelectionValid = true; Mcmode.push_back(197);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211) { SelectionValid = true; Mcmode.push_back(219);}
+ }
+
+ if(Nint==6) {
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211&&MctkPID[5]==-311) { SelectionValid = true; Mcmode.push_back(153);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==211&&MctkPID[3]==-211&&MctkPID[4]==-211&&MctkPID[5]==-321) { SelectionValid = true; Mcmode.push_back(159);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211&&MctkPID[5]==-211) { SelectionValid = true; Mcmode.push_back(213);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==211&&MctkPID[3]==-211&&MctkPID[4]==-211&&MctkPID[5]==-211) { SelectionValid = true; Mcmode.push_back(220);}
+ }
+
+ if(SelectionValid==false&&Nint==2) Mcmode.push_back(882);
+ if(SelectionValid==false&&Nint==3) Mcmode.push_back(883);
+ if(SelectionValid==false&&Nint==4) Mcmode.push_back(884);
+ if(SelectionValid==false&&Nint==5) Mcmode.push_back(885);
+ if(SelectionValid==false&&Nint==6) Mcmode.push_back(886);
+ if(SelectionValid==false&&Nint==7) Mcmode.push_back(887);
+ if(SelectionValid==false&&Nint==8) Mcmode.push_back(888);
+ if(SelectionValid==false&&Nint==9) Mcmode.push_back(889);
+
+}
+}
+
+void DDmcmode::D0bmcmode(SmartDataPtr<Event::McParticleCol> mcParticleCol){
+
+  bool SelectionValid = false;
+  MctkPID.clear();
+
+    Mcmode.clear();
+     Ptkmc.clear();
+
+  if(mcParticleCol){
+    Event::McParticleCol::iterator iter_mc = mcParticleCol->begin();
+    bool MotherParticleDecay(false);
+    int rootIndex(-1);
+    for (; iter_mc != mcParticleCol->end(); iter_mc++){
+      if ((*iter_mc)->primaryParticle())                                   continue;
+      if (!(*iter_mc)->decayFromGenerator())                               continue;
+
+      int pdgid = (*iter_mc)->particleProperty();
+      int mcidx = ((*iter_mc)->mother()).trackIndex() - rootIndex;
+
+      if(pdgid==-22)                                                       continue;
+      if(pdgid==22&&(((*iter_mc)->mother()).particleProperty()==111))      continue;
+      if(pdgid==22&&(((*iter_mc)->mother()).particleProperty()==221))      continue;
+      if(abs(pdgid)==11&&(((*iter_mc)->mother()).particleProperty()==111)) continue;
+
+      int motherparticlepdg = -421;
+
+      if(pdgid==motherparticlepdg){
+        MotherParticleDecay = true;
+        rootIndex = (*iter_mc)->trackIndex();
+      }
+      if (!MotherParticleDecay)                                            continue;
+      bool DDecayValid = false;
+
+      if( 
+          (((*iter_mc)->mother()).particleProperty()==motherparticlepdg ) ||
+          ((((*iter_mc)->mother()).mother()).particleProperty()==motherparticlepdg) ||
+          (((((*iter_mc)->mother()).mother()).mother()).particleProperty()==motherparticlepdg) || 
+          ((((((*iter_mc)->mother()).mother()).mother()).mother()).particleProperty()==motherparticlepdg) || 
+          (((((((*iter_mc)->mother()).mother()).mother()).mother()).mother()).particleProperty()==motherparticlepdg)
+        ) { DDecayValid = true;  }
+
+      if(!DDecayValid)                                                     continue;
+
+// Save the information of the intemediate particles directly from the parent particle D0
+      bool MctkP                      =  false;
+
+      if((((*iter_mc)->mother()).particleProperty())!=-421) continue;
+      if(pdgid==22)             MctkP = true;
+      if(fabs(pdgid)==11)       MctkP = true;
+      if(fabs(pdgid)==12)       MctkP = true;
+      if(fabs(pdgid)==13)       MctkP = true;
+      if(fabs(pdgid)==14)       MctkP = true;
+      if(fabs(pdgid)==15)       MctkP = true;
+      if(fabs(pdgid)==16)       MctkP = true;
+      if(pdgid==111)            MctkP = true;
+      if(pdgid==113)            MctkP = true;
+      if(pdgid==30113)          MctkP = true;
+      if(pdgid==221)            MctkP = true;
+      if(pdgid==331)            MctkP = true;
+      if(pdgid==310)            MctkP = true;
+      if(pdgid==130)            MctkP = true;
+      if(fabs(pdgid)==211)      MctkP = true;
+      if(fabs(pdgid)==213)      MctkP = true;
+      if(fabs(pdgid)==30213)    MctkP = true;
+      if(fabs(pdgid)==223)      MctkP = true;
+      if(fabs(pdgid)==321)      MctkP = true;
+      if(fabs(pdgid)==311)      MctkP = true;
+      if(fabs(pdgid)==313)      MctkP = true;
+      if(fabs(pdgid)==315)      MctkP = true;
+      if(fabs(pdgid)==323)      MctkP = true;
+      if(fabs(pdgid)==325)      MctkP = true;
+      if(fabs(pdgid)==333)      MctkP = true;
+      if(pdgid==10111)          MctkP = true;
+      if(fabs(pdgid)==10211)    MctkP = true;
+      if(fabs(pdgid)==10213)    MctkP = true;
+      if(fabs(pdgid)==10311)    MctkP = true;
+      if(fabs(pdgid)==10313)    MctkP = true;
+      if(fabs(pdgid)==10323)    MctkP = true;
+      if(fabs(pdgid)==20323)    MctkP = true;
+      if(pdgid==10221)          MctkP = true;
+      if(pdgid==50221)          MctkP = true;
+      if(pdgid==90100221)       MctkP = true;
+      if(pdgid==20213)          MctkP = true;
+
+      int Idtrk = pdgid;
+      MctkPID.push_back(Idtrk);
+      }
+
+      int Nint = MctkPID.size();
+//      cout<<"MctkPID = "<<Nint<<endl;
+
+// Judging the D0 modes by the intemediate particles directly from the parent particle D0
+
+    sort(MctkPID.begin(),MctkPID.end(),greater<int>());
+
+/*
+if(Nint==2) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<endl;
+if(Nint==3) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<endl;
+if(Nint==4) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<","<<MctkPID[3]<<endl;
+if(Nint==5) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<","<<MctkPID[3]<<","<<MctkPID[4]<<endl;
+if(Nint==6) cout<<"aaaa"<<Nint<<","<<MctkPID[0]<<","<<MctkPID[1]<<","<<MctkPID[2]<<","<<MctkPID[3]<<","<<MctkPID[4]<<","<<MctkPID[5]<<endl;
+*/
+
+ if(Nint==2) {
+  if(MctkPID[0]==    321&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(-117);}
+  if(MctkPID[0]==    310&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-118);}
+  if(MctkPID[0]==    130&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-119);}
+  if(MctkPID[0]==    311&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(-120);}
+  if(MctkPID[0]==    331&&MctkPID[1]==   311) { SelectionValid = true; Mcmode.push_back(-121);}
+  if(MctkPID[0]==    311&&MctkPID[1]==   223) { SelectionValid = true; Mcmode.push_back(-122);}
+  if(MctkPID[0]==    313&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(-123);}
+  if(MctkPID[0]==    331&&MctkPID[1]==   313) { SelectionValid = true; Mcmode.push_back(-124);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-20213) { SelectionValid = true; Mcmode.push_back(-125);}
+  if(MctkPID[0]==    323&&MctkPID[1]==  -213) { SelectionValid = true; Mcmode.push_back(-126);}
+  if(MctkPID[0]==    313&&MctkPID[1]==   113) { SelectionValid = true; Mcmode.push_back(-127);}
+  if(MctkPID[0]==    313&&MctkPID[1]==   223) { SelectionValid = true; Mcmode.push_back(-128);}
+  if(MctkPID[0]==    313&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-130);}
+  if(MctkPID[0]==  10323&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(-131);}
+  if(MctkPID[0]==  10313&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-132);}
+  if(MctkPID[0]==    311&&MctkPID[1]== 10111) { SelectionValid = true; Mcmode.push_back(-154);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-10211) { SelectionValid = true; Mcmode.push_back(-155);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   311) { SelectionValid = true; Mcmode.push_back(-161);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   313) { SelectionValid = true; Mcmode.push_back(-162);}
+  if(MctkPID[0]==    333&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(-172);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(-173);}
+  if(MctkPID[0]==    310&&MctkPID[1]==   310) { SelectionValid = true; Mcmode.push_back(-174);}
+  if(MctkPID[0]==    130&&MctkPID[1]==   130) { SelectionValid = true; Mcmode.push_back(-175);}
+  if(MctkPID[0]==    311&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(-176);}
+  if(MctkPID[0]==    313&&MctkPID[1]==  -311) { SelectionValid = true; Mcmode.push_back(-177);}
+  if(MctkPID[0]==    323&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(-178);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  -323) { SelectionValid = true; Mcmode.push_back(-179);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-181);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   113) { SelectionValid = true; Mcmode.push_back(-183);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-10323) { SelectionValid = true; Mcmode.push_back(-193);}
+  if(MctkPID[0]==  10323&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(-194);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-20323) { SelectionValid = true; Mcmode.push_back(-195);}
+  if(MctkPID[0]==  20323&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(-196);}
+  if(MctkPID[0]==    333&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(-198);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(-199);}
+  if(MctkPID[0]==    111&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-200);}
+  if(MctkPID[0]==    221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-201);}
+  if(MctkPID[0]==    331&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-202);}
+  if(MctkPID[0]==    221&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(-204);}
+  if(MctkPID[0]==    331&&MctkPID[1]==   221) { SelectionValid = true; Mcmode.push_back(-205);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  -213) { SelectionValid = true; Mcmode.push_back(-206);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(-207);}
+  if(MctkPID[0]==    113&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-208);}
+  if(MctkPID[0]==    113&&MctkPID[1]==   113) { SelectionValid = true; Mcmode.push_back(-211);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  -213) { SelectionValid = true; Mcmode.push_back(-214);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  -321) { SelectionValid = true; Mcmode.push_back(-223);}
+  if(MctkPID[0]==    333&&MctkPID[1]==    22) { SelectionValid = true; Mcmode.push_back(-226);}
+  if(MctkPID[0]==    313&&MctkPID[1]==    22) { SelectionValid = true; Mcmode.push_back(-227);}
+  if(MctkPID[0]==  10221&&MctkPID[1]==   311) { SelectionValid = true; Mcmode.push_back(-229);}
+  if(MctkPID[0]==9010221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-230);}
+  if(MctkPID[0]==    211&&MctkPID[1]==-30213) { SelectionValid = true; Mcmode.push_back(-233);}
+  if(MctkPID[0]==  30113&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-234);}
+  if(MctkPID[0]==  30213&&MctkPID[1]==  -211) { SelectionValid = true; Mcmode.push_back(-235);}
+  if(MctkPID[0]==  10221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-236);}
+  if(MctkPID[0]==  50221&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-237);}
+  if(MctkPID[0]==    225&&MctkPID[1]==   111) { SelectionValid = true; Mcmode.push_back(-238);}
+  if(MctkPID[0]==    211&&MctkPID[1]==-20213) { SelectionValid = true; Mcmode.push_back(-239);}
+  if(MctkPID[0]==    313&&MctkPID[1]==  -313) { SelectionValid = true; Mcmode.push_back(-241);}
+ }
+
+ if(Nint==3) {
+  if(MctkPID[0]==    323&&MctkPID[1]==  11&&MctkPID[2]==  -12) { SelectionValid = true; Mcmode.push_back(-101);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  11&&MctkPID[2]==  -12) { SelectionValid = true; Mcmode.push_back(-102);}
+  if(MctkPID[0]==  10323&&MctkPID[1]==  11&&MctkPID[2]==  -12) { SelectionValid = true; Mcmode.push_back(-103);}
+  if(MctkPID[0]==    325&&MctkPID[1]==  11&&MctkPID[2]==  -12) { SelectionValid = true; Mcmode.push_back(-104);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  11&&MctkPID[2]==  -12) { SelectionValid = true; Mcmode.push_back(-107);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  11&&MctkPID[2]==  -12) { SelectionValid = true; Mcmode.push_back(-108);}
+  if(MctkPID[0]==    323&&MctkPID[1]==  13&&MctkPID[2]==  -14) { SelectionValid = true; Mcmode.push_back(-109);}
+  if(MctkPID[0]==    321&&MctkPID[1]==  13&&MctkPID[2]==  -14) { SelectionValid = true; Mcmode.push_back(-110);}
+  if(MctkPID[0]==  10323&&MctkPID[1]==  13&&MctkPID[2]==  -14) { SelectionValid = true; Mcmode.push_back(-111);}
+  if(MctkPID[0]==    325&&MctkPID[1]==  13&&MctkPID[2]==  -14) { SelectionValid = true; Mcmode.push_back(-112);}
+  if(MctkPID[0]==    211&&MctkPID[1]==  13&&MctkPID[2]==  -14) { SelectionValid = true; Mcmode.push_back(-115);}
+  if(MctkPID[0]==    213&&MctkPID[1]==  13&&MctkPID[2]==  -14) { SelectionValid = true; Mcmode.push_back(-116);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-211&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-129);}
+  if(MctkPID[0]==    311&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-133);}
+  if(MctkPID[0]==    311&&MctkPID[1]== 111&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-134);}
+  if(MctkPID[0]==    313&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-135);}
+  if(MctkPID[0]==    313&&MctkPID[1]== 111&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-136);}
+  if(MctkPID[0]==    323&&MctkPID[1]== 111&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-137);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 111&&MctkPID[2]== -213) { SelectionValid = true; Mcmode.push_back(-138);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 113&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-139);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 223&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-140);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 221&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-141);}
+  if(MctkPID[0]==    331&&MctkPID[1]== 321&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-142);}
+  if(MctkPID[0]==    311&&MctkPID[1]== 221&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-143);}
+  if(MctkPID[0]==    323&&MctkPID[1]== 113&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-157);}
+  if(MctkPID[0]==    333&&MctkPID[1]== 321&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-150);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 311&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-163);}
+  if(MctkPID[0]==    310&&MctkPID[1]== 310&&MctkPID[2]==  310) { SelectionValid = true; Mcmode.push_back(-164);}
+  if(MctkPID[0]==    130&&MctkPID[1]== 130&&MctkPID[2]==  130) { SelectionValid = true; Mcmode.push_back(-165);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 313&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-170);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 111&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-180);}
+  if(MctkPID[0]==    333&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-182);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-211&&MctkPID[2]== -311) { SelectionValid = true; Mcmode.push_back(-187);}
+  if(MctkPID[0]==    311&&MctkPID[1]== 211&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-188);}
+  if(MctkPID[0]==    321&&MctkPID[1]==-211&&MctkPID[2]== -313) { SelectionValid = true; Mcmode.push_back(-191);}
+  if(MctkPID[0]==    313&&MctkPID[1]== 211&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-192);}
+  if(MctkPID[0]==9010221&&MctkPID[1]== 111&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-209);}
+  if(MctkPID[0]==    111&&MctkPID[1]== 111&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-210);}
+  if(MctkPID[0]==    223&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-216);}
+  if(MctkPID[0]==    113&&MctkPID[1]== 113&&MctkPID[2]==  111) { SelectionValid = true; Mcmode.push_back(-218);}
+  if(MctkPID[0]==    221&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-221);}
+  if(MctkPID[0]==    331&&MctkPID[1]== 221&&MctkPID[2]== -221) { SelectionValid = true; Mcmode.push_back(-222);}
+  if(MctkPID[0]==    211&&MctkPID[1]== 111&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-224);}
+  if(MctkPID[0]==    321&&MctkPID[1]== 113&&MctkPID[2]== -321) { SelectionValid = true; Mcmode.push_back(-231);}
+  if(MctkPID[0]==9010221&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-232);}
+  if(MctkPID[0]==    225&&MctkPID[1]== 211&&MctkPID[2]== -211) { SelectionValid = true; Mcmode.push_back(-240);}
+ }
+
+ if(Nint==4) {
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]==  11&&MctkPID[3]== -12) { SelectionValid = true; Mcmode.push_back(-105);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]==  11&&MctkPID[3]== -12) { SelectionValid = true; Mcmode.push_back(-106);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]==  13&&MctkPID[3]== -14) { SelectionValid = true; Mcmode.push_back(-113);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]==  13&&MctkPID[3]== -14) { SelectionValid = true; Mcmode.push_back(-114);}
+  if(MctkPID[0]==311&&MctkPID[1]==221&&MctkPID[2]== 211&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-144);}
+  if(MctkPID[0]==311&&MctkPID[1]==221&&MctkPID[2]== 111&&MctkPID[3]== 111) { SelectionValid = true; Mcmode.push_back(-145);}
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-146);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-147);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-148);}
+  if(MctkPID[0]==311&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]== 111) { SelectionValid = true; Mcmode.push_back(-149);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]== 113&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-156);}
+  if(MctkPID[0]==323&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-158);}
+  if(MctkPID[0]==211&&MctkPID[1]==130&&MctkPID[2]== 130&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(-166);}
+  if(MctkPID[0]==321&&MctkPID[1]==130&&MctkPID[2]== 130&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-167);}
+  if(MctkPID[0]==321&&MctkPID[1]==310&&MctkPID[2]== 310&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-168);}
+  if(MctkPID[0]==310&&MctkPID[1]==310&&MctkPID[2]== 211&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(-169);}
+  if(MctkPID[0]==321&&MctkPID[1]==321&&MctkPID[2]==-211&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(-171);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(-184);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(-185);}
+  if(MctkPID[0]==311&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(-186);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]== 111&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(-189);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]==-211&&MctkPID[3]==-311) { SelectionValid = true; Mcmode.push_back(-190);}
+  if(MctkPID[0]==221&&MctkPID[1]==211&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-203);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-212);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-215);}
+  if(MctkPID[0]==211&&MctkPID[1]==113&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-217);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==-211&&MctkPID[3]==-321) { SelectionValid = true; Mcmode.push_back(-225);}
+  if(MctkPID[0]==313&&MctkPID[1]==211&&MctkPID[2]== 111&&MctkPID[3]==-211) { SelectionValid = true; Mcmode.push_back(-228);}
+  }
+
+ if(Nint==5) {
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]==-211&&MctkPID[4]==-211) { SelectionValid = true; Mcmode.push_back(-150);}
+  if(MctkPID[0]==321&&MctkPID[1]==111&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211) { SelectionValid = true; Mcmode.push_back(-151);}
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211) { SelectionValid = true; Mcmode.push_back(-152);}
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]==-211&&MctkPID[4]==-321) { SelectionValid = true; Mcmode.push_back(-197);}
+  if(MctkPID[0]==211&&MctkPID[1]==111&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211) { SelectionValid = true; Mcmode.push_back(-219);}
+ }
+
+ if(Nint==6) {
+  if(MctkPID[0]==311&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]== 111&&MctkPID[5]==-211) { SelectionValid = true; Mcmode.push_back(-153);}
+  if(MctkPID[0]==321&&MctkPID[1]==211&&MctkPID[2]==211&&MctkPID[3]==-211&&MctkPID[4]==-211&&MctkPID[5]==-211) { SelectionValid = true; Mcmode.push_back(-159);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==111&&MctkPID[3]== 111&&MctkPID[4]==-211&&MctkPID[5]==-211) { SelectionValid = true; Mcmode.push_back(-213);}
+  if(MctkPID[0]==211&&MctkPID[1]==211&&MctkPID[2]==211&&MctkPID[3]==-211&&MctkPID[4]==-211&&MctkPID[5]==-211) { SelectionValid = true; Mcmode.push_back(-220);}
+ }
+
+ if(SelectionValid==false&&Nint==2) Mcmode.push_back(-882);
+ if(SelectionValid==false&&Nint==3) Mcmode.push_back(-883);
+ if(SelectionValid==false&&Nint==4) Mcmode.push_back(-884);
+ if(SelectionValid==false&&Nint==5) Mcmode.push_back(-885);
+ if(SelectionValid==false&&Nint==6) Mcmode.push_back(-886);
+ if(SelectionValid==false&&Nint==7) Mcmode.push_back(-887);
+ if(SelectionValid==false&&Nint==8) Mcmode.push_back(-888);
+ if(SelectionValid==false&&Nint==9) Mcmode.push_back(-889);
+
+}
+}

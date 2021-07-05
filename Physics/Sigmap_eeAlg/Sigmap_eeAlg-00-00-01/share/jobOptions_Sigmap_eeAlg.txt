@@ -1,0 +1,5 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr.DLLs += {"Sigmap_eeAlg"};
+ApplicationMgr.TopAlg += { "Sigmap_ee" };
+
+Sigmap_ee.mctag = 0;

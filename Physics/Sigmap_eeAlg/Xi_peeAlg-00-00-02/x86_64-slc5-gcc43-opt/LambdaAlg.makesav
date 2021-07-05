@@ -1,0 +1,301 @@
+#-- start of make_header -----------------
+
+#====================================
+#  Library LambdaAlg
+#
+#   Generated Tue Aug 25 11:57:07 2020  by yanl
+#
+#====================================
+
+include ${CMTROOT}/src/Makefile.core
+
+ifdef tag
+CMTEXTRATAGS = $(tag)
+else
+tag       = $(CMTCONFIG)
+endif
+
+cmt_LambdaAlg_has_no_target_tag = 1
+
+#--------------------------------------------------------
+
+ifdef cmt_LambdaAlg_has_target_tag
+
+tags      = $(tag),$(CMTEXTRATAGS),target_LambdaAlg
+
+LambdaAlg_tag = $(tag)
+
+ifdef READONLY
+cmt_local_tagfile_LambdaAlg = /tmp/CMT_$(LambdaAlg_tag)_LambdaAlg.make$(cmt_lock_pid)
+else
+#cmt_local_tagfile_LambdaAlg = $(LambdaAlg_tag)_LambdaAlg.make
+cmt_local_tagfile_LambdaAlg = $(bin)$(LambdaAlg_tag)_LambdaAlg.make
+endif
+
+else
+
+tags      = $(tag),$(CMTEXTRATAGS)
+
+LambdaAlg_tag = $(tag)
+
+ifdef READONLY
+cmt_local_tagfile_LambdaAlg = /tmp/CMT_$(LambdaAlg_tag).make$(cmt_lock_pid)
+else
+#cmt_local_tagfile_LambdaAlg = $(LambdaAlg_tag).make
+cmt_local_tagfile_LambdaAlg = $(bin)$(LambdaAlg_tag).make
+endif
+
+endif
+
+-include $(cmt_local_tagfile_LambdaAlg)
+
+ifdef cmt_LambdaAlg_has_target_tag
+
+ifdef READONLY
+cmt_final_setup_LambdaAlg = /tmp/CMT_LambdaAlg_LambdaAlgsetup.make
+cmt_local_LambdaAlg_makefile = /tmp/CMT_LambdaAlg$(cmt_lock_pid).make
+else
+cmt_final_setup_LambdaAlg = $(bin)LambdaAlg_LambdaAlgsetup.make
+cmt_local_LambdaAlg_makefile = $(bin)LambdaAlg.make
+endif
+
+else
+
+ifdef READONLY
+cmt_final_setup_LambdaAlg = /tmp/CMT_LambdaAlgsetup.make
+cmt_local_LambdaAlg_makefile = /tmp/CMT_LambdaAlg$(cmt_lock_pid).make
+else
+cmt_final_setup_LambdaAlg = $(bin)LambdaAlgsetup.make
+cmt_local_LambdaAlg_makefile = $(bin)LambdaAlg.make
+endif
+
+endif
+
+ifdef READONLY
+cmt_final_setup = /tmp/CMT_LambdaAlgsetup.make
+else
+cmt_final_setup = $(bin)LambdaAlgsetup.make
+endif
+
+LambdaAlg ::
+
+
+ifdef READONLY
+LambdaAlg ::
+	@echo tags=$(tags)
+	@echo cmt_local_tagfile=$(cmt_local_tagfile)
+endif
+
+
+dirs ::
+	@if test ! -r requirements ; then echo "No requirements file" ; fi; \
+	  if test ! -d $(bin) ; then $(mkdir) -p $(bin) ; fi
+
+javadirs ::
+	@if test ! -d $(javabin) ; then $(mkdir) -p $(javabin) ; fi
+
+srcdirs ::
+	@if test ! -d $(src) ; then $(mkdir) -p $(src) ; fi
+
+help ::
+	$(echo) 'LambdaAlg'
+
+binobj = 
+ifdef STRUCTURED_OUTPUT
+binobj = LambdaAlg/
+LambdaAlg::
+	@if test ! -d $(bin)$(binobj) ; then $(mkdir) -p $(bin)$(binobj) ; fi
+	$(echo) "STRUCTURED_OUTPUT="$(bin)$(binobj)
+endif
+
+#-- end of make_header ------------------
+
+#-- start of libary_header ---------------
+
+LambdaAlglibname   = $(bin)$(library_prefix)LambdaAlg$(library_suffix)
+LambdaAlglib       = $(LambdaAlglibname).a
+LambdaAlgstamp     = $(bin)LambdaAlg.stamp
+LambdaAlgshstamp   = $(bin)LambdaAlg.shstamp
+
+LambdaAlg :: dirs  LambdaAlgLIB
+	$(echo) "LambdaAlg ok"
+
+#-- end of libary_header ----------------
+
+LambdaAlgLIB :: $(LambdaAlglib) $(LambdaAlgshstamp)
+	@/bin/echo "------> LambdaAlg : library ok"
+
+$(LambdaAlglib) :: $(bin)Lambda.o $(bin)Lambda_entries.o $(bin)Lambda_load.o
+	$(lib_echo) library
+	$(lib_silent) cd $(bin); \
+	  $(ar) $(LambdaAlglib) $?
+	$(lib_silent) $(ranlib) $(LambdaAlglib)
+	$(lib_silent) cat /dev/null >$(LambdaAlgstamp)
+
+#------------------------------------------------------------------
+#  Future improvement? to empty the object files after
+#  storing in the library
+#
+##	  for f in $?; do \
+##	    rm $${f}; touch $${f}; \
+##	  done
+#------------------------------------------------------------------
+
+$(LambdaAlglibname).$(shlibsuffix) :: $(LambdaAlglib) $(LambdaAlgstamps)
+	$(lib_silent) cd $(bin); QUIET=$(QUIET); $(make_shlib) "$(tags)" LambdaAlg $(LambdaAlg_shlibflags)
+
+$(LambdaAlgshstamp) :: $(LambdaAlglibname).$(shlibsuffix)
+	@if test -f $(LambdaAlglibname).$(shlibsuffix) ; then cat /dev/null >$(LambdaAlgshstamp) ; fi
+
+LambdaAlgclean ::
+	$(cleanup_echo) objects
+	$(cleanup_silent) cd $(bin); /bin/rm -f $(bin)Lambda.o $(bin)Lambda_entries.o $(bin)Lambda_load.o
+
+#-----------------------------------------------------------------
+#
+#  New section for automatic installation
+#
+#-----------------------------------------------------------------
+
+ifeq ($(INSTALLAREA),)
+installarea = $(CMTINSTALLAREA)
+else
+ifeq ($(findstring `,$(INSTALLAREA)),`)
+installarea = $(shell $(subst `,, $(INSTALLAREA)))
+else
+installarea = $(INSTALLAREA)
+endif
+endif
+
+install_dir = ${installarea}/${CMTCONFIG}/lib
+LambdaAlginstallname = $(library_prefix)LambdaAlg$(library_suffix).$(shlibsuffix)
+
+LambdaAlg :: LambdaAlginstall
+
+install :: LambdaAlginstall
+
+LambdaAlginstall :: $(install_dir)/$(LambdaAlginstallname)
+	@if test ! "${installarea}" = ""; then\
+	  echo "installation done"; \
+	fi
+
+$(install_dir)/$(LambdaAlginstallname) :: $(bin)$(LambdaAlginstallname)
+	@if test ! "${installarea}" = ""; then \
+	  cd $(bin); \
+	  if test ! "$(install_dir)" = ""; then \
+	    if test ! -d "$(install_dir)"; then \
+	      mkdir -p $(install_dir); \
+	    fi ; \
+	    if test -d "$(install_dir)"; then \
+	      echo "Installing library $(LambdaAlginstallname) into $(install_dir)"; \
+	      if test -e $(install_dir)/$(LambdaAlginstallname); then \
+	        $(cmt_uninstall_area_command) $(install_dir)/$(LambdaAlginstallname); \
+	        $(cmt_uninstall_area_command) $(install_dir)/$(LambdaAlginstallname).cmtref; \
+	      fi; \
+	      $(cmt_install_area_command) `pwd`/$(LambdaAlginstallname) $(install_dir)/$(LambdaAlginstallname); \
+	      echo `pwd`/$(LambdaAlginstallname) >$(install_dir)/$(LambdaAlginstallname).cmtref; \
+	    fi \
+          else \
+	    echo "Cannot install library $(LambdaAlginstallname), no installation directory specified"; \
+	  fi; \
+	fi
+
+LambdaAlgclean :: LambdaAlguninstall
+
+uninstall :: LambdaAlguninstall
+
+LambdaAlguninstall ::
+	@if test ! "${installarea}" = ""; then \
+	  cd $(bin); \
+	  if test ! "$(install_dir)" = ""; then \
+	    if test -d "$(install_dir)"; then \
+	      echo "Removing installed library $(LambdaAlginstallname) from $(install_dir)"; \
+	      $(cmt_uninstall_area_command) $(install_dir)/$(LambdaAlginstallname); \
+	      $(cmt_uninstall_area_command) $(install_dir)/$(LambdaAlginstallname).cmtref; \
+	    fi \
+          else \
+	    echo "Cannot uninstall library $(LambdaAlginstallname), no installation directory specified"; \
+	  fi; \
+	fi
+
+
+
+
+#-- start of dependency ------------------
+ifneq ($(MAKECMDGOALS),LambdaAlgclean)
+
+#$(bin)LambdaAlg_dependencies.make :: dirs
+
+ifndef QUICK
+$(bin)LambdaAlg_dependencies.make : ../src/Lambda.cxx ../src/components/Lambda_entries.cxx ../src/components/Lambda_load.cxx $(use_requirements) $(cmt_final_setup_LambdaAlg)
+	$(echo) "(LambdaAlg.make) Rebuilding $@"; \
+	  $(build_dependencies) LambdaAlg -all_sources -out=$@ ../src/Lambda.cxx ../src/components/Lambda_entries.cxx ../src/components/Lambda_load.cxx
+endif
+
+#$(LambdaAlg_dependencies)
+
+-include $(bin)LambdaAlg_dependencies.make
+
+endif
+#-- end of dependency -------------------
+#-- start of cpp_library -----------------
+
+$(bin)LambdaAlg_dependencies.make : $(Lambda_cxx_dependencies)
+
+$(bin)$(binobj)Lambda.o : $(Lambda_cxx_dependencies)
+	$(cpp_echo) $(src)Lambda.cxx
+	$(cpp_silent) $(cppcomp) -o $(@) $(use_pp_cppflags) $(LambdaAlg_pp_cppflags) $(lib_LambdaAlg_pp_cppflags) $(Lambda_pp_cppflags) $(use_cppflags) $(LambdaAlg_cppflags) $(lib_LambdaAlg_cppflags) $(Lambda_cppflags) $(Lambda_cxx_cppflags)  $(src)Lambda.cxx
+
+#-- end of cpp_library ------------------
+#-- start of cpp_library -----------------
+
+$(bin)LambdaAlg_dependencies.make : $(Lambda_entries_cxx_dependencies)
+
+$(bin)$(binobj)Lambda_entries.o : $(Lambda_entries_cxx_dependencies)
+	$(cpp_echo) $(src)components/Lambda_entries.cxx
+	$(cpp_silent) $(cppcomp) -o $(@) $(use_pp_cppflags) $(LambdaAlg_pp_cppflags) $(lib_LambdaAlg_pp_cppflags) $(Lambda_entries_pp_cppflags) $(use_cppflags) $(LambdaAlg_cppflags) $(lib_LambdaAlg_cppflags) $(Lambda_entries_cppflags) $(Lambda_entries_cxx_cppflags) -I../src/components $(src)components/Lambda_entries.cxx
+
+#-- end of cpp_library ------------------
+#-- start of cpp_library -----------------
+
+$(bin)LambdaAlg_dependencies.make : $(Lambda_load_cxx_dependencies)
+
+$(bin)$(binobj)Lambda_load.o : $(Lambda_load_cxx_dependencies)
+	$(cpp_echo) $(src)components/Lambda_load.cxx
+	$(cpp_silent) $(cppcomp) -o $(@) $(use_pp_cppflags) $(LambdaAlg_pp_cppflags) $(lib_LambdaAlg_pp_cppflags) $(Lambda_load_pp_cppflags) $(use_cppflags) $(LambdaAlg_cppflags) $(lib_LambdaAlg_cppflags) $(Lambda_load_cppflags) $(Lambda_load_cxx_cppflags) -I../src/components $(src)components/Lambda_load.cxx
+
+#-- end of cpp_library ------------------
+#-- start of cleanup_header --------------
+
+clean :: LambdaAlgclean
+	@cd .
+
+ifndef PEDANTIC
+.DEFAULT::
+	$(echo) "(LambdaAlg.make) $@: No rule for such target" >&2
+#	@echo "#CMT> Warning: $@: No rule for such target" >&2; exit
+else
+.DEFAULT::
+	$(echo) "(LambdaAlg.make) PEDANTIC: $@: No rule for such target" >&2
+	if test $@ = "$(cmt_final_setup)" -o\
+	 $@ = "$(cmt_final_setup_LambdaAlg)" ; then\
+	 found=n; for s in 1 2 3 4 5; do\
+	 sleep $$s; test ! -f $@ || { found=y; break; }\
+	 done; if test $$found = n; then\
+	 test -z "$(cmtmsg)" ||\
+	 echo "$(CMTMSGPREFIX)" "(LambdaAlg.make) PEDANTIC: $@: Seems to be missing. Ignore it for now" >&2; exit 0 ; fi;\
+	 elif test `expr index $@ '/'` -ne 0 ; then\
+	 test -z "$(cmtmsg)" ||\
+	 echo "$(CMTMSGPREFIX)" "(LambdaAlg.make) PEDANTIC: $@: Seems to be a missing file. Please check" >&2; exit 2 ; \
+	 else\
+	 test -z "$(cmtmsg)" ||\
+	 echo "$(CMTMSGPREFIX)" "(LambdaAlg.make) PEDANTIC: $@: Seems to be a fake target due to some pattern. Just ignore it" >&2 ; exit 0; fi
+endif
+
+LambdaAlgclean ::
+#-- end of cleanup_header ---------------
+#-- start of cleanup_library -------------
+	$(cleanup_echo) library
+	-$(cleanup_silent) cd $(bin); /bin/rm -f $(binobj)$(library_prefix)LambdaAlg$(library_suffix).a $(binobj)$(library_prefix)LambdaAlg$(library_suffix).s? $(binobj)LambdaAlg.stamp $(binobj)LambdaAlg.shstamp
+#-- end of cleanup_library ---------------
+

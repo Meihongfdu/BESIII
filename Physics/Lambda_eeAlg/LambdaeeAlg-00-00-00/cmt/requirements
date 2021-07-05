@@ -1,0 +1,24 @@
+package LambdaeeAlg
+author He Kanglin <hekl@ihep.ac.cn>
+
+use BesPolicy BesPolicy-*
+use GaudiInterface GaudiInterface-* External
+use DDmcmode     DDmcmode-*     Analysis
+use DstEvent    DstEvent-* Event
+use EventModel   EventModel-*  Event
+use EvtRecEvent EvtRecEvent-* Event
+
+use VertexFit    VertexFit-*   Analysis
+use ParticleID   ParticleID-*  Analysis
+use Ecmset       Ecmset-*       Analysis
+use BesROOT      BesROOT-00-*     External
+use DTagTool   DTagTool-*  Analysis
+use McTruth      McTruth-*     Event
+
+use GammaConv    GammaConv-*   Reconstruction
+
+
+apply_pattern component_library
+library LambdaeeAlg  *.cxx  components/*.cxx
+
+apply_pattern declare_runtime files=*.txt

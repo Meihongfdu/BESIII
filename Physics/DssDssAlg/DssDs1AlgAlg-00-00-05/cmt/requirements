@@ -1,0 +1,27 @@
+package DssDs1Alg
+author QI Tianyu <shedarshian@gmail.com>
+
+use BesPolicy BesPolicy-*
+use GaudiInterface GaudiInterface-* External
+
+use DstEvent DstEvent-* Event
+use EventModel   EventModel-*  Event
+use EvtRecEvent EvtRecEvent-* Event
+
+use VertexFit    VertexFit-*   Analysis 
+use ParticleID   ParticleID-*  Analysis
+
+use BesROOT      BesROOT-00-*     External
+use McTruth      McTruth-*     Event
+use EventNavigator EventNavigator-* Event
+# EMC info                                                     
+use EmcRecEventModel * Emc                                     
+
+# MDC info                                                     
+use MdcRecEvent * Mdc                                          
+use MdcRawEvent * Mdc  
+
+apply_pattern component_library 
+library DssDs1Alg  *.cxx  components/*.cxx
+
+apply_pattern declare_runtime files=*.txt

@@ -1,0 +1,29 @@
+package DDmcmode
+author  Bo Zheng <zhengb@mail.ihep.ac.cn> 
+
+branches cmt src DDmcmode
+
+use    BesPolicy           BesPolicy-01-*
+use    GaudiInterface      GaudiInterface-*   External
+use    BesCLHEP            BesCLHEP-*         External
+#use    TrkReco *          Reconstruction
+use    DstEvent            DstEvent-*         Event
+use    EventModel          EventModel-*       Event
+use    EvtRecEvent         EvtRecEvent-*      Event
+use    ParticleID          ParticleID-*       Analysis
+use    EventTag            EventTag*          Event
+use    McTruth             McTruth-*          Event
+
+use VertexFit    VertexFit-*   Analysis
+apply_pattern installed_linkopts
+
+
+#Linker library
+library DDmcmode  *.cxx 
+
+apply_pattern package_linkopts
+apply_pattern package_stamps
+apply_pattern ld_library_path
+
+apply_pattern package_shlibflags
+

@@ -1,0 +1,8 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr.DLLs += {"Jpsdecthreepi"};
+ApplicationMgr.TopAlg += {"Jpsdecthreepi" };
+
+
+ Jpsdecthreepi.TestMC = true;
+ 
+ Jpsdecthreepi.TestJPSMC = true;
